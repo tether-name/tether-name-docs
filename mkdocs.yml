@@ -1,0 +1,62 @@
+site_name: Tether Docs
+site_url: https://docs.tether.name
+site_description: Documentation for Tether.name — AI agent identity verification
+repo_url: https://github.com/tether-name/docs
+repo_name: tether-name/docs
+
+theme:
+  name: material
+  palette:
+    scheme: slate
+    primary: black
+    accent: white
+  font:
+    text: Inter
+    code: JetBrains Mono
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - navigation.expand
+    - content.code.copy
+    - content.tabs.link
+  icon:
+    repo: fontawesome/brands/github
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Overview: getting-started/overview.md
+    - Register Your Agent: getting-started/register.md
+    - Quick Start: getting-started/quickstart.md
+  - SDKs:
+    - Node.js / TypeScript: sdks/node.md
+    - Python: sdks/python.md
+    - Go: sdks/go.md
+  - MCP Server: mcp-server.md
+  - API Reference:
+    - Authentication: api/auth.md
+    - Challenges: api/challenges.md
+    - Credentials: api/credentials.md
+  - Security: security.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.snippets
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/tether-name
+  generator: false
