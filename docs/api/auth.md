@@ -1,6 +1,6 @@
 # Authentication
 
-The Tether API uses JWT access tokens for authenticated endpoints.
+The Tether API supports two authentication methods: JWT access tokens and API keys.
 
 ## Passwordless Auth
 
@@ -84,6 +84,90 @@ Authorization: Bearer eyJ...
 ```
 
 Invalidates the current session.
+
+## API Keys
+
+API keys are long-lived tokens for programmatic access. Use them to manage agents from CI/CD pipelines, scripts, or backend services without going through the magic code flow.
+
+API keys use the `tether_sk_` prefix for easy identification and leak detection.
+
+### Create an API Key
+
+Requires JWT authentication.
+
+```
+POST /api-keys
+Authorization: Bearer eyJ...
+Content-Type: application/json
+
+{
+  "name": "CI Pipeline",
+  "expiresInDays": 90
+}
+```
+
+**Response:**
+
+```json
+{
+  "id": "key_abc123",
+  "key": "tether_sk_live_...",
+  "name": "CI Pipeline",
+  "keyPrefix": "tether_sk_live_abc",
+  "expiresAt": "2026-05-27T00:00:00.000Z",
+  "createdAt": "2026-02-26T00:00:00.000Z"
+}
+```
+
+!!! warning
+    The full `key` value is shown only once. Store it securely — the API stores only a hash.
+
+### List API Keys
+
+```
+GET /api-keys
+Authorization: Bearer eyJ...
+```
+
+**Response:**
+
+```json
+[
+  {
+    "id": "key_abc123",
+    "name": "CI Pipeline",
+    "keyPrefix": "tether_sk_live_abc",
+    "expiresAt": "2026-05-27T00:00:00.000Z",
+    "createdAt": "2026-02-26T00:00:00.000Z",
+    "lastUsedAt": "2026-02-26T12:00:00.000Z",
+    "revoked": false
+  }
+]
+```
+
+### Revoke an API Key
+
+```
+DELETE /api-keys/{id}
+Authorization: Bearer eyJ...
+```
+
+### Using API Keys
+
+Include the API key in the `Authorization` header, just like a JWT:
+
+```
+Authorization: Bearer tether_sk_live_...
+```
+
+API keys can be used with all credential endpoints (`/credentials/*`). Creating and managing API keys themselves requires JWT authentication.
+
+### Security Notes
+
+- API keys are hashed before storage — they cannot be retrieved after creation.
+- The `tether_sk_` prefix enables automated leak detection in logs and repositories.
+- Revoked keys are rejected immediately.
+- Set `expiresInDays` to limit key lifetime. Omit for non-expiring keys.
 
 ## Public Endpoints
 

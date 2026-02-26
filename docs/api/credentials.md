@@ -4,7 +4,7 @@ Credentials represent a registered agent. Each credential has a unique ID and an
 
 ## Create a Credential
 
-Requires authentication.
+Requires authentication (JWT or API key).
 
 ```
 POST /credentials/issue
@@ -52,7 +52,7 @@ Content-Type: application/json
 
 ## Check Credential Status
 
-Requires authentication.
+Requires authentication (JWT or API key).
 
 ```
 GET /credentials/{credentialId}/status
@@ -69,7 +69,7 @@ Authorization: Bearer eyJ...
 
 ## List Credentials
 
-Requires authentication.
+Requires authentication (JWT or API key).
 
 ```
 GET /credentials
@@ -80,7 +80,7 @@ Returns an array of all credentials associated with your account.
 
 ## Delete a Credential
 
-Requires authentication.
+Requires authentication (JWT or API key).
 
 ```
 DELETE /credentials/{credentialId}

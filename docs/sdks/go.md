@@ -61,10 +61,13 @@ result, err := client.SubmitProof(ctx, challenge, proof)
 
 ```go
 client, err := tether.NewClient(tether.Options{
-    // Required
-    CredentialID: "your-credential-id",
+    // Authentication — choose one:
 
-    // Private key — provide one of:
+    // Option 1: API key (for agent management and credential operations)
+    ApiKey: "tether_sk_...",
+
+    // Option 2: Credential + private key (for verification and signing)
+    CredentialID: "your-credential-id",
     PrivateKeyPath: "/path/to/key.der",  // File path (DER or PEM)
     PrivateKeyPEM:  pemBytes,             // PEM as []byte
     PrivateKeyDER:  derBytes,             // DER as []byte
@@ -74,16 +77,51 @@ client, err := tether.NewClient(tether.Options{
 })
 ```
 
-All options fall back to environment variables:
+When `ApiKey` is set, `CredentialID` and private key options become optional. A private key is still required for `Verify()` and `Sign()`.
 
+Environment variables:
+
+- `TETHER_API_KEY`
 - `TETHER_CREDENTIAL_ID`
 - `TETHER_PRIVATE_KEY_PATH`
+
+## Agent Management
+
+One line to start managing agents programmatically:
+
+```go
+client, err := tether.NewClient(tether.Options{
+    ApiKey: "tether_sk_...",
+})
+
+// Create an agent
+agent, err := client.CreateAgent(ctx, "my-bot")
+fmt.Println(agent.CredentialID)
+
+// List all agents
+agents, err := client.ListAgents(ctx)
+
+// Delete an agent
+err = client.DeleteAgent(ctx, agent.CredentialID)
+```
 
 ## API
 
 ### `tether.NewClient(opts Options) (*TetherClient, error)`
 
-Creates a new client. Returns an error if the credential ID is missing or the private key can't be loaded.
+Creates a new client. Returns an error if neither `ApiKey` nor `CredentialID` is provided.
+
+### `client.CreateAgent(ctx, name) (*AgentResult, error)`
+
+Create a new agent credential. Requires API key auth.
+
+### `client.ListAgents(ctx) ([]*AgentResult, error)`
+
+List all agent credentials. Requires API key auth.
+
+### `client.DeleteAgent(ctx, credentialID) error`
+
+Delete an agent credential. Requires API key auth.
 
 ### `client.Verify(ctx) (*VerificationResult, error)`
 

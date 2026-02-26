@@ -33,10 +33,13 @@ result = client.submit_proof(challenge, proof)
 
 ```python
 client = TetherClient(
-    # Required
-    credential_id="your-credential-id",
+    # Authentication — choose one:
 
-    # Private key — provide one of:
+    # Option 1: API key (for agent management and credential operations)
+    api_key="tether_sk_...",
+
+    # Option 2: Credential + private key (for verification and signing)
+    credential_id="your-credential-id",
     private_key_path="/path/to/key.der",     # File path (DER or PEM)
     private_key_pem="-----BEGIN...",          # PEM string or bytes
     private_key_der=b"...",                   # DER bytes
@@ -47,8 +50,11 @@ client = TetherClient(
 )
 ```
 
-All options fall back to environment variables:
+When `api_key` is set, `credential_id` and private key options become optional. A private key is still required for `verify()` and `sign()`.
 
+Environment variables:
+
+- `TETHER_API_KEY`
 - `TETHER_CREDENTIAL_ID`
 - `TETHER_PRIVATE_KEY_PATH`
 
@@ -60,7 +66,37 @@ with TetherClient(credential_id="...", private_key_path="...") as client:
 # HTTP client automatically closed
 ```
 
+## Agent Management
+
+One line to start managing agents programmatically:
+
+```python
+client = TetherClient(api_key="tether_sk_...")
+
+# Create an agent
+agent = client.create_agent("my-bot")
+print(agent.credential_id)
+
+# List all agents
+agents = client.list_agents()
+
+# Delete an agent
+client.delete_agent(agent.credential_id)
+```
+
 ## API
+
+### `client.create_agent(name) -> AgentResult`
+
+Create a new agent credential.
+
+### `client.list_agents() -> list[AgentResult]`
+
+List all agent credentials.
+
+### `client.delete_agent(credential_id) -> None`
+
+Delete an agent credential.
 
 ### `client.verify() -> VerificationResult`
 

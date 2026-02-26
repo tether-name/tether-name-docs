@@ -33,10 +33,13 @@ const result = await client.submitProof(challenge, proof);
 
 ```typescript
 const client = new TetherClient({
-  // Required
-  credentialId: 'your-credential-id',
+  // Authentication — choose one:
 
-  // Private key — provide one of:
+  // Option 1: API key (for agent management and credential operations)
+  apiKey: 'tether_sk_...',
+
+  // Option 2: Credential + private key (for verification and signing)
+  credentialId: 'your-credential-id',
   privateKeyPath: '/path/to/key.der',  // File path (DER or PEM)
   privateKeyPem: '-----BEGIN...',       // PEM string
   privateKeyBuffer: buffer,             // DER buffer
@@ -46,12 +49,51 @@ const client = new TetherClient({
 });
 ```
 
-Credential ID and key path can also be set via environment variables:
+When `apiKey` is set, `credentialId` and private key options become optional. A private key is still required for `verify()` and `sign()`.
 
+Environment variables:
+
+- `TETHER_API_KEY`
 - `TETHER_CREDENTIAL_ID`
 - `TETHER_PRIVATE_KEY_PATH`
 
+## Agent Management
+
+One line to start managing agents programmatically:
+
+```typescript
+const client = new TetherClient({ apiKey: 'tether_sk_...' });
+
+// Create an agent
+const agent = await client.createAgent('my-bot');
+console.log(agent.credentialId);
+
+// List all agents
+const agents = await client.listAgents();
+
+// Delete an agent
+await client.deleteAgent(agent.credentialId);
+```
+
 ## API
+
+### `client.createAgent(name)`
+
+Create a new agent credential.
+
+Returns: `Promise<AgentResult>`
+
+### `client.listAgents()`
+
+List all agent credentials.
+
+Returns: `Promise<AgentResult[]>`
+
+### `client.deleteAgent(credentialId)`
+
+Delete an agent credential.
+
+Returns: `Promise<void>`
 
 ### `client.verify()`
 
