@@ -86,12 +86,50 @@ tether check "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 tether check "a1b2c3d4-e5f6-7890-abcd-ef1234567890" --json
 ```
 
+### `tether agent create <name>`
+
+Create a new agent. Requires an API key.
+
+```bash
+tether agent create "my-bot" --description "My helpful bot"
+```
+
+```bash
+tether agent create "my-bot" --json
+```
+
+Returns the agent's ID, name, and a **registration token** (save it — it can't be retrieved later).
+
+### `tether agent list`
+
+List all agents associated with your API key.
+
+```bash
+tether agent list
+```
+
+```bash
+tether agent list --json
+```
+
+### `tether agent delete <id>`
+
+Delete an agent by its credential ID.
+
+```bash
+tether agent delete "credential-id-here"
+```
+
+```bash
+tether agent delete "credential-id-here" --json
+```
+
 ## Configuration
 
 The CLI resolves configuration in this order (first wins):
 
-1. **CLI flags** — `--credential-id`, `--key-path`, `--api-url`
-2. **Environment variables** — `TETHER_CREDENTIAL_ID`, `TETHER_PRIVATE_KEY_PATH`, `TETHER_API_URL`
+1. **CLI flags** — `--credential-id`, `--key-path`, `--api-url`, `--api-key`
+2. **Environment variables** — `TETHER_CREDENTIAL_ID`, `TETHER_PRIVATE_KEY_PATH`, `TETHER_API_URL`, `TETHER_API_KEY`
 3. **Config file** — `~/.tether/config.json` (created by `tether init`)
 
 ### Global Flags
@@ -101,10 +139,13 @@ The CLI resolves configuration in this order (first wins):
 | `--credential-id <id>` | Override credential ID |
 | `--key-path <path>` | Override private key file path |
 | `--api-url <url>` | Override API base URL |
+| `--api-key <key>` | API key for agent management operations |
 | `--verbose` | Enable debug output |
 | `--json` | Machine-readable JSON output (on supported commands) |
 
-## Example Workflow
+## Example Workflows
+
+### Verification
 
 ```bash
 # 1. Set up credentials
@@ -121,6 +162,21 @@ tether challenge
 tether sign "the-challenge-code"
 tether check "the-challenge-code"
 ```
+
+### Agent Management
+
+```bash
+# Create an agent
+tether agent create "my-bot" --description "My helpful assistant"
+
+# List all agents
+tether agent list
+
+# Delete an agent
+tether agent delete "credential-id"
+```
+
+Agent management commands require an API key. Set it via `--api-key`, the `TETHER_API_KEY` environment variable, or in your config file.
 
 ## Links
 
