@@ -64,7 +64,7 @@ client, err := tether.NewClient(tether.Options{
     // Authentication — choose one:
 
     // Option 1: API key (for agent management and credential operations)
-    ApiKey: "tether_sk_...",
+    ApiKey: "sk-tether-name-...",
 
     // Option 2: Credential + private key (for verification and signing)
     CredentialID: "your-credential-id",
@@ -91,7 +91,7 @@ One line to start managing agents programmatically:
 
 ```go
 client, err := tether.NewClient(tether.Options{
-    ApiKey: "tether_sk_...",
+    ApiKey: "sk-tether-name-...",
 })
 
 // Create an agent

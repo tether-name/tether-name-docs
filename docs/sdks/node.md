@@ -36,7 +36,7 @@ const client = new TetherClient({
   // Authentication — choose one:
 
   // Option 1: API key (for agent management and credential operations)
-  apiKey: 'tether_sk_...',
+  apiKey: 'sk-tether-name-...',
 
   // Option 2: Credential + private key (for verification and signing)
   credentialId: 'your-credential-id',
@@ -62,7 +62,7 @@ Environment variables:
 One line to start managing agents programmatically:
 
 ```typescript
-const client = new TetherClient({ apiKey: 'tether_sk_...' });
+const client = new TetherClient({ apiKey: 'sk-tether-name-...' });
 
 // Create an agent
 const agent = await client.createAgent('my-bot');

@@ -36,7 +36,7 @@ client = TetherClient(
     # Authentication — choose one:
 
     # Option 1: API key (for agent management and credential operations)
-    api_key="tether_sk_...",
+    api_key="sk-tether-name-...",
 
     # Option 2: Credential + private key (for verification and signing)
     credential_id="your-credential-id",
@@ -71,7 +71,7 @@ with TetherClient(credential_id="...", private_key_path="...") as client:
 One line to start managing agents programmatically:
 
 ```python
-client = TetherClient(api_key="tether_sk_...")
+client = TetherClient(api_key="sk-tether-name-...")
 
 # Create an agent
 agent = client.create_agent("my-bot")

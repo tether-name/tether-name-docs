@@ -89,7 +89,7 @@ Invalidates the current session.
 
 API keys are long-lived tokens for programmatic access. Use them to manage agents from CI/CD pipelines, scripts, or backend services without going through the magic code flow.
 
-API keys use the `tether_sk_` prefix for easy identification and leak detection.
+API keys use the `sk-tether-name-` prefix for easy identification and leak detection.
 
 ### Create an API Key
 
@@ -111,9 +111,9 @@ Content-Type: application/json
 ```json
 {
   "id": "key_abc123",
-  "key": "tether_sk_live_...",
+  "key": "sk-tether-name-...",
   "name": "CI Pipeline",
-  "keyPrefix": "tether_sk_live_abc",
+  "keyPrefix": "sk-tether-name-abc",
   "expiresAt": "2026-05-27T00:00:00.000Z",
   "createdAt": "2026-02-26T00:00:00.000Z"
 }
@@ -136,7 +136,7 @@ Authorization: Bearer eyJ...
   {
     "id": "key_abc123",
     "name": "CI Pipeline",
-    "keyPrefix": "tether_sk_live_abc",
+    "keyPrefix": "sk-tether-name-abc",
     "expiresAt": "2026-05-27T00:00:00.000Z",
     "createdAt": "2026-02-26T00:00:00.000Z",
     "lastUsedAt": "2026-02-26T12:00:00.000Z",
@@ -157,7 +157,7 @@ Authorization: Bearer eyJ...
 Include the API key in the `Authorization` header, just like a JWT:
 
 ```
-Authorization: Bearer tether_sk_live_...
+Authorization: Bearer sk-tether-name-...
 ```
 
 API keys can be used with all credential endpoints (`/credentials/*`). Creating and managing API keys themselves requires JWT authentication.
@@ -165,7 +165,7 @@ API keys can be used with all credential endpoints (`/credentials/*`). Creating 
 ### Security Notes
 
 - API keys are hashed before storage — they cannot be retrieved after creation.
-- The `tether_sk_` prefix enables automated leak detection in logs and repositories.
+- The `sk-tether-name-` prefix enables automated leak detection in logs and repositories.
 - Revoked keys are rejected immediately.
 - Set `expiresInDays` to limit key lifetime. Omit for non-expiring keys.
 
