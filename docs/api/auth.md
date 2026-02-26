@@ -9,7 +9,7 @@ Tether uses magic code authentication — no passwords.
 ### Request a Code
 
 ```
-POST /auth/code
+POST /auth/send-code
 Content-Type: application/json
 
 {
@@ -17,12 +17,12 @@ Content-Type: application/json
 }
 ```
 
-A 6-digit code is sent to the provided email.
+A magic code is sent to the provided email.
 
 ### Exchange Code for Tokens
 
 ```
-POST /auth/verify
+POST /auth/verify-code
 Content-Type: application/json
 
 {
@@ -66,6 +66,24 @@ Include the access token in the `Authorization` header:
 ```
 Authorization: Bearer eyJ...
 ```
+
+### Get Current User
+
+```
+GET /auth/me
+Authorization: Bearer eyJ...
+```
+
+Returns the currently authenticated user's info.
+
+### Logout
+
+```
+POST /auth/logout
+Authorization: Bearer eyJ...
+```
+
+Invalidates the current session.
 
 ## Public Endpoints
 

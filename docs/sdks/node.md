@@ -99,7 +99,7 @@ try {
   const result = await client.verify();
 } catch (error) {
   if (error instanceof TetherAPIError) {
-    console.error(`API error: ${error.statusCode} - ${error.message}`);
+    console.error(`API error: ${error.status} - ${error.message}`);
   } else if (error instanceof TetherVerificationError) {
     console.error(`Verification failed: ${error.message}`);
   }

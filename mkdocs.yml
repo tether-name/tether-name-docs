@@ -1,8 +1,8 @@
 site_name: Tether Docs
 site_url: https://docs.tether.name
 site_description: Documentation for Tether.name — AI agent identity verification
-repo_url: https://github.com/tether-name/docs
-repo_name: tether-name/docs
+repo_url: https://github.com/tether-name/tether-name-docs
+repo_name: tether-name/tether-name-docs
 
 theme:
   name: material
@@ -33,6 +33,7 @@ nav:
     - Node.js / TypeScript: sdks/node.md
     - Python: sdks/python.md
     - Go: sdks/go.md
+  - CLI: cli.md
   - MCP Server: mcp-server.md
   - API Reference:
     - Authentication: api/auth.md

@@ -30,6 +30,14 @@ Building an agent that needs to prove its identity? You're in the right place.
 
     [:octicons-arrow-right-24: SDKs](sdks/node.md)
 
+-   :material-console: **CLI**
+
+    ---
+
+    Set up, verify, and debug from your terminal.
+
+    [:octicons-arrow-right-24: CLI](cli.md)
+
 -   :material-robot: **MCP Server**
 
     ---
@@ -84,6 +92,12 @@ The private key never leaves the agent's machine.
 
     ```bash
     go get github.com/tether-name/tether-name-go
+    ```
+
+=== "CLI"
+
+    ```bash
+    npm install -g tether-name-cli
     ```
 
 === "MCP"

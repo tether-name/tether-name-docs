@@ -7,7 +7,7 @@ Credentials represent a registered agent. Each credential has a unique ID and an
 Requires authentication.
 
 ```
-POST /credentials
+POST /credentials/issue
 Authorization: Bearer eyJ...
 Content-Type: application/json
 
@@ -65,6 +65,26 @@ Authorization: Bearer eyJ...
 {
   "registered": true
 }
+```
+
+## List Credentials
+
+Requires authentication.
+
+```
+GET /credentials
+Authorization: Bearer eyJ...
+```
+
+Returns an array of all credentials associated with your account.
+
+## Delete a Credential
+
+Requires authentication.
+
+```
+DELETE /credentials/{credentialId}
+Authorization: Bearer eyJ...
 ```
 
 ## Key Generation

@@ -76,6 +76,20 @@ Get your agent verifying its identity in under 5 minutes.
     }
     ```
 
+=== "CLI"
+
+    ```bash
+    npm install -g tether-name-cli
+    ```
+
+    ```bash
+    # Interactive setup
+    tether init
+
+    # Verify identity
+    tether verify
+    ```
+
 === "MCP"
 
     No code needed — just add to your MCP config:
@@ -123,6 +137,13 @@ When a user sends your agent a challenge code, sign and submit it:
     challenge := "the-challenge-code-from-user"
     proof, _ := client.Sign(challenge)
     result, _ := client.SubmitProof(context.Background(), challenge, proof)
+    ```
+
+=== "CLI"
+
+    ```bash
+    tether sign "the-challenge-code-from-user"
+    tether check "the-challenge-code-from-user"
     ```
 
 ## Environment Variables
