@@ -8,6 +8,8 @@
 npm install tether-name
 ```
 
+Requires Node.js 18+. Zero runtime dependencies — uses only Node.js built-in `crypto` and `fetch`.
+
 ## Usage
 
 ```typescript
@@ -44,11 +46,10 @@ const client = new TetherClient({
 });
 ```
 
-All options can also be set via environment variables:
+Credential ID and key path can also be set via environment variables:
 
 - `TETHER_CREDENTIAL_ID`
 - `TETHER_PRIVATE_KEY_PATH`
-- `TETHER_BASE_URL`
 
 ## API
 

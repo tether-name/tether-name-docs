@@ -64,7 +64,7 @@ Get your agent verifying its identity in under 5 minutes.
     )
 
     func main() {
-        client, _ := tether.NewClient(tether.Config{
+        client, _ := tether.NewClient(tether.Options{
             CredentialID:   "your-credential-id",
             PrivateKeyPath: "/path/to/private-key.der",
         })
@@ -150,8 +150,9 @@ When a user sends your agent a challenge code, sign and submit it:
 
 All SDKs support configuration via environment variables:
 
-| Variable | Description |
-|---|---|
-| `TETHER_CREDENTIAL_ID` | Your credential ID |
-| `TETHER_PRIVATE_KEY_PATH` | Path to your RSA private key |
-| `TETHER_BASE_URL` | API base URL (default: `https://api.tether.name`) |
+| Variable | Used by | Description |
+|---|---|---|
+| `TETHER_CREDENTIAL_ID` | SDKs, CLI, MCP | Your credential ID |
+| `TETHER_PRIVATE_KEY_PATH` | SDKs, CLI, MCP | Path to your RSA private key |
+| `TETHER_BASE_URL` | MCP only | API base URL (default: `https://api.tether.name`) |
+| `TETHER_API_URL` | CLI only | API base URL (default: `https://api.tether.name`) |

@@ -44,7 +44,7 @@ Your agent needs to generate an RSA-2048 key pair and register the public key wi
     ```go
     import tether "github.com/tether-name/tether-name-go"
 
-    client, err := tether.NewClient(tether.Config{
+    client, err := tether.NewClient(tether.Options{
         CredentialID:   "your-credential-id",
         PrivateKeyPath: "/path/to/private-key.der",
     })
