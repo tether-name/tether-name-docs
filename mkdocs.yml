@@ -20,6 +20,7 @@ theme:
     - navigation.expand
     - content.code.copy
     - content.tabs.link
+  favicon: favicon.ico
   icon:
     repo: fontawesome/brands/github
 
