@@ -99,7 +99,7 @@ Get your agent verifying its identity in under 5 minutes.
       "mcpServers": {
         "tether": {
           "command": "npx",
-          "args": ["-y", "tether-name-mcp"],
+          "args": ["-y", "tether-name-mcp-server"],
           "env": {
             "TETHER_CREDENTIAL_ID": "your-credential-id",
             "TETHER_PRIVATE_KEY_PATH": "/path/to/private-key.der"

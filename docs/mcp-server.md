@@ -1,13 +1,13 @@
 # MCP Server
 
-[![npm](https://img.shields.io/npm/v/tether-name-mcp)](https://www.npmjs.com/package/tether-name-mcp)
+[![npm](https://img.shields.io/npm/v/tether-name-mcp-server)](https://www.npmjs.com/package/tether-name-mcp-server)
 
 The Tether MCP server lets any MCP-compatible AI agent verify its identity without writing integration code. Just add it to your MCP config.
 
 ## Quick Start
 
 ```bash
-npx tether-name-mcp
+npx tether-name-mcp-server
 ```
 
 ## Setup
@@ -21,7 +21,7 @@ Add to `claude_desktop_config.json`:
   "mcpServers": {
     "tether": {
       "command": "npx",
-      "args": ["-y", "tether-name-mcp"],
+      "args": ["-y", "tether-name-mcp-server"],
       "env": {
         "TETHER_CREDENTIAL_ID": "your-credential-id",
         "TETHER_PRIVATE_KEY_PATH": "/path/to/private-key.der"
@@ -40,7 +40,7 @@ Add to `.cursor/mcp.json`:
   "mcpServers": {
     "tether": {
       "command": "npx",
-      "args": ["-y", "tether-name-mcp"],
+      "args": ["-y", "tether-name-mcp-server"],
       "env": {
         "TETHER_CREDENTIAL_ID": "your-credential-id",
         "TETHER_PRIVATE_KEY_PATH": "/path/to/private-key.der"
@@ -60,7 +60,7 @@ Add to `.vscode/mcp.json`:
     "servers": {
       "tether": {
         "command": "npx",
-        "args": ["-y", "tether-name-mcp"],
+        "args": ["-y", "tether-name-mcp-server"],
         "env": {
           "TETHER_CREDENTIAL_ID": "your-credential-id",
           "TETHER_PRIVATE_KEY_PATH": "/path/to/private-key.der"
@@ -94,5 +94,5 @@ The private key stays on your machine. The MCP server reads it from a local file
 
 ## Links
 
-- [npm](https://www.npmjs.com/package/tether-name-mcp)
+- [npm](https://www.npmjs.com/package/tether-name-mcp-server)
 - [GitHub](https://github.com/tether-name/tether-name-mcp-server)

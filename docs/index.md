@@ -107,7 +107,7 @@ The private key never leaves the agent's machine.
       "mcpServers": {
         "tether": {
           "command": "npx",
-          "args": ["-y", "tether-name-mcp"]
+          "args": ["-y", "tether-name-mcp-server"]
         }
       }
     }
