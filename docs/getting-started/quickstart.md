@@ -154,5 +154,3 @@ All SDKs support configuration via environment variables:
 |---|---|---|
 | `TETHER_CREDENTIAL_ID` | SDKs, CLI, MCP | Your credential ID |
 | `TETHER_PRIVATE_KEY_PATH` | SDKs, CLI, MCP | Path to your RSA private key |
-| `TETHER_BASE_URL` | MCP only | API base URL (default: `https://api.tether.name`) |
-| `TETHER_API_URL` | CLI only | API base URL (default: `https://api.tether.name`) |

@@ -44,8 +44,6 @@ const client = new TetherClient({
   privateKeyPem: '-----BEGIN...',       // PEM string
   privateKeyBuffer: buffer,             // DER buffer
 
-  // Optional
-  baseUrl: 'https://api.tether.name'   // API base URL
 });
 ```
 

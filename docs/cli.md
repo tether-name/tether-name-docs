@@ -128,8 +128,6 @@ tether agent delete "credential-id-here" --json
 
 The CLI resolves configuration in this order (first wins):
 
-1. **CLI flags** — `--credential-id`, `--key-path`, `--api-url`, `--api-key`
-2. **Environment variables** — `TETHER_CREDENTIAL_ID`, `TETHER_PRIVATE_KEY_PATH`, `TETHER_API_URL`, `TETHER_API_KEY`
 3. **Config file** — `~/.tether/config.json` (created by `tether init`)
 
 ### Global Flags
@@ -138,7 +136,6 @@ The CLI resolves configuration in this order (first wins):
 |---|---|
 | `--credential-id <id>` | Override credential ID |
 | `--key-path <path>` | Override private key file path |
-| `--api-url <url>` | Override API base URL |
 | `--api-key <key>` | API key for agent management operations |
 | `--verbose` | Enable debug output |
 | `--json` | Machine-readable JSON output (on supported commands) |

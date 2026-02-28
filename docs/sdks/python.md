@@ -44,9 +44,6 @@ client = TetherClient(
     private_key_pem="-----BEGIN...",          # PEM string or bytes
     private_key_der=b"...",                   # DER bytes
 
-    # Optional
-    base_url="https://api.tether.name",      # API base URL
-    timeout=30.0                              # Request timeout in seconds
 )
 ```
 

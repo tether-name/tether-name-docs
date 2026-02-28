@@ -72,8 +72,6 @@ client, err := tether.NewClient(tether.Options{
     PrivateKeyPEM:  pemBytes,             // PEM as []byte
     PrivateKeyDER:  derBytes,             // DER as []byte
 
-    // Optional
-    BaseURL: "https://api.tether.name",  // API base URL
 })
 ```
 

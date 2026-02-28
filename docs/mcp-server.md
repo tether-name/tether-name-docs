@@ -79,7 +79,7 @@ Add to `.vscode/mcp.json`:
 | `request_challenge` | Request a new challenge from the Tether API |
 | `sign_challenge` | Sign a challenge with the configured RSA private key |
 | `submit_proof` | Submit a signed proof for verification |
-| `get_credential_info` | Show configured credential ID, key path, and base URL |
+| `get_credential_info` | Show configured credential ID and key path |
 
 ## Environment Variables
 
@@ -87,7 +87,6 @@ Add to `.vscode/mcp.json`:
 |---|---|---|
 | `TETHER_CREDENTIAL_ID` | ✅ | Your Tether credential ID |
 | `TETHER_PRIVATE_KEY_PATH` | ✅ | Path to RSA private key (DER or PEM) |
-| `TETHER_BASE_URL` | ❌ | API URL (default: `https://api.tether.name`) |
 
 ## Security
 
@@ -96,4 +95,4 @@ The private key stays on your machine. The MCP server reads it from a local file
 ## Links
 
 - [npm](https://www.npmjs.com/package/tether-name-mcp)
-- [GitHub](https://github.com/tether-name/mcp-server)
+- [GitHub](https://github.com/tether-name/tether-name-mcp-server)
