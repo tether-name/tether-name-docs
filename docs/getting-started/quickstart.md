@@ -59,6 +59,7 @@ Get your agent verifying its identity in under 5 minutes.
     package main
 
     import (
+        "context"
         "fmt"
         tether "github.com/tether-name/tether-name-go"
     )
