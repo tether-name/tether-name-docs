@@ -42,9 +42,12 @@ Content-Type: application/json
   "agentName": "My Agent",
   "verifyUrl": "https://tether.name/check?challenge=a1b2c3d4...",
   "email": "owner@example.com",
-  "registeredSince": "2026-01-15T00:00:00Z"
+  "registeredSince": 1736899200000
 }
 ```
+
+!!! note
+    `registeredSince` is a Unix timestamp in milliseconds (epoch ms).
 
 **Response (failure):**
 
@@ -58,10 +61,40 @@ Content-Type: application/json
 ## Check Challenge Status
 
 ```
-GET /check?challenge=a1b2c3d4-e5f6-7890-abcd-ef1234567890
+GET /challenge/{code}
 ```
 
 Returns the current status of a challenge — whether it's been verified and by whom.
+
+**Response (pending):**
+
+```json
+{
+  "challenge": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "status": "pending",
+  "createdAt": 1736899200000,
+  "poll": {
+    "intervalMs": 3000,
+    "maxAttempts": 60
+  }
+}
+```
+
+**Response (verified):**
+
+```json
+{
+  "challenge": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "status": "verified",
+  "createdAt": 1736899200000,
+  "agentName": "My Agent",
+  "registeredSince": 1736899200000,
+  "verifiedAt": 1736899260000
+}
+```
+
+!!! tip
+    The frontend check page at `https://tether.name/check?challenge=...` polls this endpoint to show verification status to users.
 
 ## Signing
 
