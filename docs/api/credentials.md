@@ -30,7 +30,7 @@ Content-Type: application/json
 ```
 
 !!! warning
-    The `registrationToken` is shown only once. Save it — you'll need it to register your public key. It expires after 15 minutes.
+    The `registrationToken` is shown only once. Save it — you'll need it to register your public key. It expires after 5 minutes.
 
 ## Register a Public Key
 
