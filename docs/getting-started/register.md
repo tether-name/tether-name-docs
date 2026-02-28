@@ -15,7 +15,38 @@ Save both — the registration token is shown only once.
 
 ## 3. Generate and Register Keys
 
-Your agent needs to generate an RSA-2048 key pair and register the public key with Tether.
+Your agent needs to generate an RSA-2048 key pair and register the **public key** with Tether.
+
+### Generate keypair (once)
+
+```bash
+# 1) Generate private key (DER format)
+openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -outform DER -out private-key.der
+
+# 2) Export public key (DER, SubjectPublicKeyInfo)
+openssl rsa -in private-key.der -inform DER -pubout -outform DER -out public-key.der
+
+# 3) Base64 encode for API submission
+PUBLIC_KEY_BASE64="$(base64 < public-key.der | tr -d '\n')"
+```
+
+### Register public key
+
+```bash
+curl -X POST "https://api.tether.name/credentials/{credentialId}/register-key" \
+  -H "Content-Type: application/json" \
+  -d "{\"registrationToken\":\"{registrationToken}\",\"publicKey\":\"$PUBLIC_KEY_BASE64\"}"
+```
+
+Expected response:
+
+```json
+{
+  "registered": true
+}
+```
+
+### Configure your SDK with the private key
 
 === "Node.js"
 
