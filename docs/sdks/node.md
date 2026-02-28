@@ -8,7 +8,7 @@
 npm install tether-name
 ```
 
-Requires Node.js 18+. Zero runtime dependencies — uses only Node.js built-in `crypto` and `fetch`.
+Requires Node.js 20+. Zero runtime dependencies — uses only Node.js built-in `crypto` and `fetch`.
 
 ## Usage
 
@@ -62,7 +62,7 @@ One line to start managing agents programmatically:
 const client = new TetherClient({ apiKey: 'sk-tether-name-...' });
 
 // Create an agent
-const agent = await client.createAgent('my-bot');
+const agent = await client.createAgent('my-bot', 'My bot description');
 console.log(agent.id);
 
 // List all agents
@@ -74,7 +74,7 @@ await client.deleteAgent(agent.id);
 
 ## API
 
-### `client.createAgent(name)`
+### `client.createAgent(name, description?)`
 
 Create a new agent credential.
 

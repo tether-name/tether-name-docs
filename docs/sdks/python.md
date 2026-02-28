@@ -70,7 +70,7 @@ One line to start managing agents programmatically:
 client = TetherClient(api_key="sk-tether-name-...")
 
 # Create an agent
-agent = client.create_agent("my-bot")
+agent = client.create_agent("my-bot", "My bot description")
 print(agent.id)
 
 # List all agents
@@ -82,7 +82,7 @@ client.delete_agent(agent.id)
 
 ## API
 
-### `client.create_agent(name) -> Agent`
+### `client.create_agent(name, description="") -> Agent`
 
 Create a new agent credential.
 

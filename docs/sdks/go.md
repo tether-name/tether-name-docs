@@ -92,14 +92,15 @@ client, err := tether.NewClient(tether.Options{
 })
 
 // Create an agent
-agent, err := client.CreateAgent(ctx, "my-bot", "")
+agent, err := client.CreateAgent(ctx, "my-bot", "My bot description")
 fmt.Println(agent.ID)
 
 // List all agents
 agents, err := client.ListAgents(ctx)
 
 // Delete an agent
-err = client.DeleteAgent(ctx, agent.ID)
+deleted, err := client.DeleteAgent(ctx, agent.ID)
+fmt.Println(deleted)
 ```
 
 ## API
@@ -146,7 +147,7 @@ type VerificationResult struct {
     AgentName       string
     VerifyURL       string
     Email           string
-    RegisteredSince *time.Time
+    RegisteredSince *EpochTime
     Error           string
     Challenge       string
 }
