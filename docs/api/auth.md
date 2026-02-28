@@ -114,10 +114,13 @@ Content-Type: application/json
   "key": "sk-tether-name-...",
   "name": "CI Pipeline",
   "keyPrefix": "sk-tether-name-abc",
-  "expiresAt": "2026-05-27T00:00:00.000Z",
-  "createdAt": "2026-02-26T00:00:00.000Z"
+  "expiresAt": 1748304000000,
+  "createdAt": 1740528000000
 }
 ```
+
+!!! note
+    Timestamps are Unix epoch milliseconds. `expiresAt` is `0` if the key doesn't expire.
 
 !!! warning
     The full `key` value is shown only once. Store it securely — the API stores only a hash.
@@ -137,9 +140,9 @@ Authorization: Bearer eyJ...
     "id": "key_abc123",
     "name": "CI Pipeline",
     "keyPrefix": "sk-tether-name-abc",
-    "expiresAt": "2026-05-27T00:00:00.000Z",
-    "createdAt": "2026-02-26T00:00:00.000Z",
-    "lastUsedAt": "2026-02-26T12:00:00.000Z",
+    "expiresAt": 1748304000000,
+    "createdAt": 1740528000000,
+    "lastUsedAt": 1740571200000,
     "revoked": false
   }
 ]
@@ -175,4 +178,4 @@ The following endpoints do **not** require authentication:
 
 - `POST /challenge` — Request a challenge
 - `POST /challenge/verify` — Submit proof
-- `GET /check` — Check challenge status
+- `GET /challenge/{code}` — Check challenge status
