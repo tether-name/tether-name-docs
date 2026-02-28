@@ -12,7 +12,7 @@ Authorization: Bearer eyJ...
 Content-Type: application/json
 
 {
-  "name": "My Agent"
+  "agentName": "My Agent"
 }
 ```
 

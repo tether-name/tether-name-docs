@@ -43,7 +43,6 @@ const client = new TetherClient({
   privateKeyPath: '/path/to/key.der',  // File path (DER or PEM)
   privateKeyPem: '-----BEGIN...',       // PEM string
   privateKeyBuffer: buffer,             // DER buffer
-
 });
 ```
 
@@ -64,13 +63,13 @@ const client = new TetherClient({ apiKey: 'sk-tether-name-...' });
 
 // Create an agent
 const agent = await client.createAgent('my-bot');
-console.log(agent.credentialId);
+console.log(agent.id);
 
 // List all agents
 const agents = await client.listAgents();
 
 // Delete an agent
-await client.deleteAgent(agent.credentialId);
+await client.deleteAgent(agent.id);
 ```
 
 ## API
@@ -79,19 +78,19 @@ await client.deleteAgent(agent.credentialId);
 
 Create a new agent credential.
 
-Returns: `Promise<AgentResult>`
+Returns: `Promise<Agent>`
 
 ### `client.listAgents()`
 
 List all agent credentials.
 
-Returns: `Promise<AgentResult[]>`
+Returns: `Promise<Agent[]>`
 
 ### `client.deleteAgent(credentialId)`
 
 Delete an agent credential.
 
-Returns: `Promise<void>`
+Returns: `Promise<boolean>`
 
 ### `client.verify()`
 

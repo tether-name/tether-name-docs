@@ -71,7 +71,6 @@ client, err := tether.NewClient(tether.Options{
     PrivateKeyPath: "/path/to/key.der",  // File path (DER or PEM)
     PrivateKeyPEM:  pemBytes,             // PEM as []byte
     PrivateKeyDER:  derBytes,             // DER as []byte
-
 })
 ```
 
@@ -93,14 +92,14 @@ client, err := tether.NewClient(tether.Options{
 })
 
 // Create an agent
-agent, err := client.CreateAgent(ctx, "my-bot")
-fmt.Println(agent.CredentialID)
+agent, err := client.CreateAgent(ctx, "my-bot", "")
+fmt.Println(agent.ID)
 
 // List all agents
 agents, err := client.ListAgents(ctx)
 
 // Delete an agent
-err = client.DeleteAgent(ctx, agent.CredentialID)
+err = client.DeleteAgent(ctx, agent.ID)
 ```
 
 ## API
@@ -109,15 +108,15 @@ err = client.DeleteAgent(ctx, agent.CredentialID)
 
 Creates a new client. Returns an error if neither `ApiKey` nor `CredentialID` is provided.
 
-### `client.CreateAgent(ctx, name) (*AgentResult, error)`
+### `client.CreateAgent(ctx, agentName, description) (*Agent, error)`
 
 Create a new agent credential. Requires API key auth.
 
-### `client.ListAgents(ctx) ([]*AgentResult, error)`
+### `client.ListAgents(ctx) ([]Agent, error)`
 
 List all agent credentials. Requires API key auth.
 
-### `client.DeleteAgent(ctx, credentialID) error`
+### `client.DeleteAgent(ctx, credentialID) (bool, error)`
 
 Delete an agent credential. Requires API key auth.
 

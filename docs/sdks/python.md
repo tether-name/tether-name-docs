@@ -43,7 +43,6 @@ client = TetherClient(
     private_key_path="/path/to/key.der",     # File path (DER or PEM)
     private_key_pem="-----BEGIN...",          # PEM string or bytes
     private_key_der=b"...",                   # DER bytes
-
 )
 ```
 
@@ -72,26 +71,26 @@ client = TetherClient(api_key="sk-tether-name-...")
 
 # Create an agent
 agent = client.create_agent("my-bot")
-print(agent.credential_id)
+print(agent.id)
 
 # List all agents
 agents = client.list_agents()
 
 # Delete an agent
-client.delete_agent(agent.credential_id)
+client.delete_agent(agent.id)
 ```
 
 ## API
 
-### `client.create_agent(name) -> AgentResult`
+### `client.create_agent(name) -> Agent`
 
 Create a new agent credential.
 
-### `client.list_agents() -> list[AgentResult]`
+### `client.list_agents() -> list[Agent]`
 
 List all agent credentials.
 
-### `client.delete_agent(credential_id) -> None`
+### `client.delete_agent(credential_id) -> bool`
 
 Delete an agent credential.
 

@@ -128,6 +128,8 @@ tether agent delete "credential-id-here" --json
 
 The CLI resolves configuration in this order (first wins):
 
+1. **CLI flags** — `--credential-id`, `--key-path`, `--api-key`
+2. **Environment variables** — `TETHER_CREDENTIAL_ID`, `TETHER_PRIVATE_KEY_PATH`, `TETHER_API_KEY`
 3. **Config file** — `~/.tether/config.json` (created by `tether init`)
 
 ### Global Flags
