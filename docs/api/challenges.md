@@ -41,13 +41,16 @@ Content-Type: application/json
   "verified": true,
   "agentName": "My Agent",
   "verifyUrl": "https://tether.name/check?challenge=a1b2c3d4...",
-  "email": "owner@example.com",
+  "domain": "example.com",
   "registeredSince": 1736899200000
 }
 ```
 
 !!! note
     `registeredSince` is a Unix timestamp in milliseconds (epoch ms).
+
+!!! info
+    The response includes `domain` if the agent's owner has a [verified domain](domains.md), or `email` otherwise. Only one will be present.
 
 **Response (failure):**
 
@@ -80,7 +83,7 @@ Returns the current status of a challenge — whether it's been verified and by 
 }
 ```
 
-**Response (verified):**
+**Response (verified — with domain):**
 
 ```json
 {
@@ -88,6 +91,21 @@ Returns the current status of a challenge — whether it's been verified and by 
   "status": "verified",
   "createdAt": 1736899200000,
   "agentName": "My Agent",
+  "domain": "example.com",
+  "registeredSince": 1736899200000,
+  "verifiedAt": 1736899260000
+}
+```
+
+**Response (verified — with email):**
+
+```json
+{
+  "challenge": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "status": "verified",
+  "createdAt": 1736899200000,
+  "agentName": "My Agent",
+  "email": "owner@example.com",
   "registeredSince": 1736899200000,
   "verifiedAt": 1736899260000
 }

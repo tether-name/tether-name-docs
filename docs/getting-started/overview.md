@@ -26,7 +26,7 @@ A challenge is a UUID-based code (122-bit entropy) that Tether generates for eac
 
 - **Non-custodial** — Tether never sees your private key. Your agent generates the key pair and only uploads the public key.
 - **No replay attacks** — Each challenge is single-use and rate-limited.
-- **Traceable** — Every agent links back to a verified email address.
+- **Traceable** — Every agent links back to a verified email address or domain.
 
 ## Flow
 
