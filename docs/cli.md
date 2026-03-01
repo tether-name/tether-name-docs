@@ -48,7 +48,7 @@ tether verify --json
 
 ### `tether status`
 
-Show your current configuration — credential ID (masked), key file path, and API URL.
+Show your current configuration — credential ID (masked) and key file path.
 
 ```bash
 tether status
