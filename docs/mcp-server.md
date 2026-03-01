@@ -23,7 +23,7 @@ Add to `claude_desktop_config.json`:
       "command": "npx",
       "args": ["-y", "tether-name-mcp-server"],
       "env": {
-        "TETHER_CREDENTIAL_ID": "your-credential-id",
+        "TETHER_AGENT_ID": "your-agent-id",
         "TETHER_PRIVATE_KEY_PATH": "/path/to/private-key.der"
       }
     }
@@ -42,7 +42,7 @@ Add to `.cursor/mcp.json`:
       "command": "npx",
       "args": ["-y", "tether-name-mcp-server"],
       "env": {
-        "TETHER_CREDENTIAL_ID": "your-credential-id",
+        "TETHER_AGENT_ID": "your-agent-id",
         "TETHER_PRIVATE_KEY_PATH": "/path/to/private-key.der"
       }
     }
@@ -62,7 +62,7 @@ Add to `.vscode/mcp.json`:
         "command": "npx",
         "args": ["-y", "tether-name-mcp-server"],
         "env": {
-          "TETHER_CREDENTIAL_ID": "your-credential-id",
+          "TETHER_AGENT_ID": "your-agent-id",
           "TETHER_PRIVATE_KEY_PATH": "/path/to/private-key.der"
         }
       }
@@ -79,13 +79,13 @@ Add to `.vscode/mcp.json`:
 | `request_challenge` | Request a new challenge from the Tether API |
 | `sign_challenge` | Sign a challenge with the configured RSA private key |
 | `submit_proof` | Submit a signed proof for verification |
-| `get_credential_info` | Show configured credential ID and key path |
+| `get_agent_info` | Show configured agent ID and key path |
 
 ## Environment Variables
 
 | Variable | Required | Description |
 |---|---|---|
-| `TETHER_CREDENTIAL_ID` | ✅ | Your Tether credential ID |
+| `TETHER_AGENT_ID` | ✅ | Your Tether agent ID |
 | `TETHER_PRIVATE_KEY_PATH` | ✅ | Path to RSA private key (DER or PEM) |
 
 ## Security

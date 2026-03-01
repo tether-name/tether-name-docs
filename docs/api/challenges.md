@@ -30,7 +30,7 @@ Content-Type: application/json
 {
   "challenge": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
   "proof": "url-safe-base64-signature",
-  "credentialId": "your-credential-id"
+  "agentId": "your-agent-id"
 }
 ```
 

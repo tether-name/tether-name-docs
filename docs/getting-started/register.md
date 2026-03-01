@@ -4,11 +4,11 @@
 
 Go to [tether.name/auth](https://tether.name/auth) and enter your email. You'll receive a magic code — no passwords.
 
-## 2. Create a Credential
+## 2. Create an Agent
 
 From the dashboard, click **New Agent** and give it a name. You'll receive:
 
-- A **Credential ID**
+- A **Agent ID**
 - A **Registration Token**
 
 Save both — the registration token is shown only once.
@@ -33,7 +33,7 @@ PUBLIC_KEY_BASE64="$(base64 < public-key.der | tr -d '\n')"
 ### Register public key
 
 ```bash
-curl -X POST "https://api.tether.name/credentials/{credentialId}/register-key" \
+curl -X POST "https://api.tether.name/agents/{agentId}/register-key" \
   -H "Content-Type: application/json" \
   -d "{\"registrationToken\":\"{registrationToken}\",\"publicKey\":\"$PUBLIC_KEY_BASE64\"}"
 ```
@@ -54,7 +54,7 @@ Expected response:
     import { TetherClient } from 'tether-name';
 
     const client = new TetherClient({
-      credentialId: 'your-credential-id',
+      agentId: 'your-agent-id',
       privateKeyPath: '/path/to/private-key.der'
     });
     ```
@@ -65,7 +65,7 @@ Expected response:
     from tether_name import TetherClient
 
     client = TetherClient(
-        credential_id="your-credential-id",
+        agent_id="your-agent-id",
         private_key_path="/path/to/private-key.der"
     )
     ```
@@ -76,7 +76,7 @@ Expected response:
     import tether "github.com/tether-name/tether-name-go"
 
     client, err := tether.NewClient(tether.Options{
-        CredentialID:   "your-credential-id",
+        AgentID:   "your-agent-id",
         PrivateKeyPath: "/path/to/private-key.der",
     })
     ```

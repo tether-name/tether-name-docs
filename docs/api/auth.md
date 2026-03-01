@@ -163,7 +163,7 @@ Include the API key in the `Authorization` header, just like a JWT:
 Authorization: Bearer sk-tether-name-...
 ```
 
-API keys can be used with all credential endpoints (`/credentials/*`). Creating and managing API keys themselves requires JWT authentication.
+API keys can be used with all agent endpoints (`/agents/*`). Creating and managing API keys themselves requires JWT authentication.
 
 ### Security Notes
 

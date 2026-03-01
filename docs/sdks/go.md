@@ -25,7 +25,7 @@ import (
 
 func main() {
     client, err := tether.NewClient(tether.Options{
-        CredentialID:   "your-credential-id",
+        AgentID:   "your-agent-id",
         PrivateKeyPath: "/path/to/private-key.der",
     })
     if err != nil {
@@ -63,23 +63,23 @@ result, err := client.SubmitProof(ctx, challenge, proof)
 client, err := tether.NewClient(tether.Options{
     // Authentication — choose one:
 
-    // Option 1: API key (for agent management and credential operations)
+    // Option 1: API key (for agent management and agent operations)
     ApiKey: "sk-tether-name-...",
 
-    // Option 2: Credential + private key (for verification and signing)
-    CredentialID: "your-credential-id",
+    // Option 2: Agent + private key (for verification and signing)
+    AgentID: "your-agent-id",
     PrivateKeyPath: "/path/to/key.der",  // File path (DER or PEM)
     PrivateKeyPEM:  pemBytes,             // PEM as []byte
     PrivateKeyDER:  derBytes,             // DER as []byte
 })
 ```
 
-When `ApiKey` is set, `CredentialID` and private key options become optional. A private key is still required for `Verify()` and `Sign()`.
+When `ApiKey` is set, `AgentID` and private key options become optional. A private key is still required for `Verify()` and `Sign()`.
 
 Environment variables:
 
 - `TETHER_API_KEY`
-- `TETHER_CREDENTIAL_ID`
+- `TETHER_AGENT_ID`
 - `TETHER_PRIVATE_KEY_PATH`
 
 ## Agent Management
@@ -107,19 +107,19 @@ fmt.Println(deleted)
 
 ### `tether.NewClient(opts Options) (*TetherClient, error)`
 
-Creates a new client. Returns an error if neither `ApiKey` nor `CredentialID` is provided.
+Creates a new client. Returns an error if neither `ApiKey` nor `AgentID` is provided.
 
 ### `client.CreateAgent(ctx, agentName, description) (*Agent, error)`
 
-Create a new agent credential. Requires API key auth.
+Create a new agent. Requires API key auth.
 
 ### `client.ListAgents(ctx) ([]Agent, error)`
 
-List all agent credentials. Requires API key auth.
+List all agents. Requires API key auth.
 
-### `client.DeleteAgent(ctx, credentialID) (bool, error)`
+### `client.DeleteAgent(ctx, agentID) (bool, error)`
 
-Delete an agent credential. Requires API key auth.
+Delete an agent. Requires API key auth.
 
 ### `client.Verify(ctx) (*VerificationResult, error)`
 

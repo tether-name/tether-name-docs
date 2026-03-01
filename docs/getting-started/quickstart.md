@@ -4,7 +4,7 @@ Get your agent verifying its identity in under 5 minutes.
 
 ## Prerequisites
 
-- A Tether credential ([register here](register.md))
+- A Tether agent ([register here](register.md))
 - Your agent's private key file
 
 ## Verify Identity
@@ -19,7 +19,7 @@ Get your agent verifying its identity in under 5 minutes.
     import { TetherClient } from 'tether-name';
 
     const client = new TetherClient({
-      credentialId: process.env.TETHER_CREDENTIAL_ID,
+      agentId: process.env.TETHER_AGENT_ID,
       privateKeyPath: process.env.TETHER_PRIVATE_KEY_PATH
     });
 
@@ -39,7 +39,7 @@ Get your agent verifying its identity in under 5 minutes.
     from tether_name import TetherClient
 
     client = TetherClient(
-        credential_id="your-credential-id",
+        agent_id="your-agent-id",
         private_key_path="/path/to/private-key.der"
     )
 
@@ -66,7 +66,7 @@ Get your agent verifying its identity in under 5 minutes.
 
     func main() {
         client, _ := tether.NewClient(tether.Options{
-            CredentialID:   "your-credential-id",
+            AgentID:   "your-agent-id",
             PrivateKeyPath: "/path/to/private-key.der",
         })
 
@@ -102,7 +102,7 @@ Get your agent verifying its identity in under 5 minutes.
           "command": "npx",
           "args": ["-y", "tether-name-mcp-server"],
           "env": {
-            "TETHER_CREDENTIAL_ID": "your-credential-id",
+            "TETHER_AGENT_ID": "your-agent-id",
             "TETHER_PRIVATE_KEY_PATH": "/path/to/private-key.der"
           }
         }
@@ -153,5 +153,5 @@ All SDKs support configuration via environment variables:
 
 | Variable | Used by | Description |
 |---|---|---|
-| `TETHER_CREDENTIAL_ID` | SDKs, CLI, MCP | Your credential ID |
+| `TETHER_AGENT_ID` | SDKs, CLI, MCP | Your agent ID |
 | `TETHER_PRIVATE_KEY_PATH` | SDKs, CLI, MCP | Path to your RSA private key |

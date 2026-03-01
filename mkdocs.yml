@@ -39,7 +39,7 @@ nav:
   - API Reference:
     - Authentication: api/auth.md
     - Challenges: api/challenges.md
-    - Credentials: api/credentials.md
+    - Agents: api/agents.md
   - Security: security.md
 
 markdown_extensions:

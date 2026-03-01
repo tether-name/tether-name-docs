@@ -16,7 +16,7 @@ Requires Node.js 20+. Zero runtime dependencies — uses only Node.js built-in `
 import { TetherClient } from 'tether-name';
 
 const client = new TetherClient({
-  credentialId: 'your-credential-id',
+  agentId: 'your-agent-id',
   privateKeyPath: '/path/to/private-key.der'
 });
 
@@ -35,23 +35,23 @@ const result = await client.submitProof(challenge, proof);
 const client = new TetherClient({
   // Authentication — choose one:
 
-  // Option 1: API key (for agent management and credential operations)
+  // Option 1: API key (for agent management and agent operations)
   apiKey: 'sk-tether-name-...',
 
-  // Option 2: Credential + private key (for verification and signing)
-  credentialId: 'your-credential-id',
+  // Option 2: Agent + private key (for verification and signing)
+  agentId: 'your-agent-id',
   privateKeyPath: '/path/to/key.der',  // File path (DER or PEM)
   privateKeyPem: '-----BEGIN...',       // PEM string
   privateKeyBuffer: buffer,             // DER buffer
 });
 ```
 
-When `apiKey` is set, `credentialId` and private key options become optional. A private key is still required for `verify()` and `sign()`.
+When `apiKey` is set, `agentId` and private key options become optional. A private key is still required for `verify()` and `sign()`.
 
 Environment variables:
 
 - `TETHER_API_KEY`
-- `TETHER_CREDENTIAL_ID`
+- `TETHER_AGENT_ID`
 - `TETHER_PRIVATE_KEY_PATH`
 
 ## Agent Management
@@ -76,19 +76,19 @@ await client.deleteAgent(agent.id);
 
 ### `client.createAgent(name, description?)`
 
-Create a new agent credential.
+Create a new agent.
 
 Returns: `Promise<Agent>`
 
 ### `client.listAgents()`
 
-List all agent credentials.
+List all agents.
 
 Returns: `Promise<Agent[]>`
 
-### `client.deleteAgent(credentialId)`
+### `client.deleteAgent(agentId)`
 
-Delete an agent credential.
+Delete an agent.
 
 Returns: `Promise<boolean>`
 

@@ -16,7 +16,7 @@ Requires Python 3.8+.
 from tether_name import TetherClient
 
 client = TetherClient(
-    credential_id="your-credential-id",
+    agent_id="your-agent-id",
     private_key_path="/path/to/private-key.der"
 )
 
@@ -35,29 +35,29 @@ result = client.submit_proof(challenge, proof)
 client = TetherClient(
     # Authentication — choose one:
 
-    # Option 1: API key (for agent management and credential operations)
+    # Option 1: API key (for agent management and agent operations)
     api_key="sk-tether-name-...",
 
-    # Option 2: Credential + private key (for verification and signing)
-    credential_id="your-credential-id",
+    # Option 2: Agent + private key (for verification and signing)
+    agent_id="your-agent-id",
     private_key_path="/path/to/key.der",     # File path (DER or PEM)
     private_key_pem="-----BEGIN...",          # PEM string or bytes
     private_key_der=b"...",                   # DER bytes
 )
 ```
 
-When `api_key` is set, `credential_id` and private key options become optional. A private key is still required for `verify()` and `sign()`.
+When `api_key` is set, `agent_id` and private key options become optional. A private key is still required for `verify()` and `sign()`.
 
 Environment variables:
 
 - `TETHER_API_KEY`
-- `TETHER_CREDENTIAL_ID`
+- `TETHER_AGENT_ID`
 - `TETHER_PRIVATE_KEY_PATH`
 
 ## Context Manager
 
 ```python
-with TetherClient(credential_id="...", private_key_path="...") as client:
+with TetherClient(agent_id="...", private_key_path="...") as client:
     result = client.verify()
 # HTTP client automatically closed
 ```
@@ -84,15 +84,15 @@ client.delete_agent(agent.id)
 
 ### `client.create_agent(name, description="") -> Agent`
 
-Create a new agent credential.
+Create a new agent.
 
 ### `client.list_agents() -> list[Agent]`
 
-List all agent credentials.
+List all agents.
 
-### `client.delete_agent(credential_id) -> bool`
+### `client.delete_agent(agent_id) -> bool`
 
-Delete an agent credential.
+Delete an agent.
 
 ### `client.verify() -> VerificationResult`
 

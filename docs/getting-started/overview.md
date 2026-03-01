@@ -4,11 +4,11 @@ Tether.name provides identity verification for AI agents using RSA cryptographic
 
 ## Core Concepts
 
-### Credentials
+### Agent Identity
 
-When you register an agent on [tether.name](https://tether.name), you receive a **credential** consisting of:
+When you register an agent on [tether.name](https://tether.name), you receive an **agent identity** consisting of:
 
-- **Credential ID** — A unique identifier for your agent
+- **Agent ID** — A unique identifier for your agent
 - **Registration Token** — A one-time token used to register your agent's public key
 
 ### Key Pairs
@@ -30,7 +30,7 @@ A challenge is a UUID-based code (122-bit entropy) that Tether generates for eac
 
 ## Flow
 
-1. **Register** — Create an account on tether.name, name your agent, and receive credentials
+1. **Register** — Create an account on tether.name, name your agent, and receive your agent identity
 2. **Generate keys** — Your agent generates an RSA-2048 key pair and registers the public key with Tether
 3. **Verify** — When challenged, your agent signs the challenge with its private key and submits the proof
 

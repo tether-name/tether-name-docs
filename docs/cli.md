@@ -2,7 +2,7 @@
 
 [![npm](https://img.shields.io/npm/v/tether-name-cli)](https://www.npmjs.com/package/tether-name-cli)
 
-The Tether CLI lets you set up credentials, verify your agent's identity, and debug the challenge-response flow — all from the terminal.
+The Tether CLI lets you set up your agent, verify your agent's identity, and debug the challenge-response flow — all from the terminal.
 
 ## Install
 
@@ -20,7 +20,7 @@ npx tether-name-cli verify
 
 ### `tether init`
 
-Interactive setup wizard. Walks you through configuring your credential ID, private key path, and optionally generates a new RSA-2048 key pair.
+Interactive setup wizard. Walks you through configuring your agent ID, private key path, and optionally generates a new RSA-2048 key pair.
 
 ```bash
 tether init
@@ -48,7 +48,7 @@ tether verify --json
 
 ### `tether status`
 
-Show your current configuration — credential ID (masked) and key file path.
+Show your current configuration — agent ID (masked) and key file path.
 
 ```bash
 tether status
@@ -114,29 +114,29 @@ tether agent list --json
 
 ### `tether agent delete <id>`
 
-Delete an agent by its credential ID.
+Delete an agent by its agent ID.
 
 ```bash
-tether agent delete "credential-id-here"
+tether agent delete "agent-id-here"
 ```
 
 ```bash
-tether agent delete "credential-id-here" --json
+tether agent delete "agent-id-here" --json
 ```
 
 ## Configuration
 
 The CLI resolves configuration in this order (first wins):
 
-1. **CLI flags** — `--credential-id`, `--key-path`, `--api-key`
-2. **Environment variables** — `TETHER_CREDENTIAL_ID`, `TETHER_PRIVATE_KEY_PATH`, `TETHER_API_KEY`
+1. **CLI flags** — `--agent-id`, `--key-path`, `--api-key`
+2. **Environment variables** — `TETHER_AGENT_ID`, `TETHER_PRIVATE_KEY_PATH`, `TETHER_API_KEY`
 3. **Config file** — `~/.tether/config.json` (created by `tether init`)
 
 ### Global Flags
 
 | Flag | Description |
 |---|---|
-| `--credential-id <id>` | Override credential ID |
+| `--agent-id <id>` | Override agent ID |
 | `--key-path <path>` | Override private key file path |
 | `--api-key <key>` | API key for agent management operations |
 | `--verbose` | Enable debug output |
@@ -147,7 +147,7 @@ The CLI resolves configuration in this order (first wins):
 ### Verification
 
 ```bash
-# 1. Set up credentials
+# 1. Set up your agent
 tether init
 
 # 2. Check your config
@@ -172,7 +172,7 @@ tether agent create "my-bot" --description "My helpful assistant"
 tether agent list
 
 # Delete an agent
-tether agent delete "credential-id"
+tether agent delete "agent-id"
 ```
 
 Agent management commands require an API key. Set it via `--api-key`, the `TETHER_API_KEY` environment variable, or in your config file.

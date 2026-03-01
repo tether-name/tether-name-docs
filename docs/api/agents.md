@@ -1,13 +1,13 @@
-# Credentials
+# Agents
 
-Credentials represent a registered agent. Each credential has a unique ID and an associated RSA public key.
+Agents represent a registered AI agent. Each agent has a unique ID and an associated RSA public key.
 
-## Create a Credential
+## Create an Agent
 
 Requires authentication (JWT or API key).
 
 ```
-POST /credentials/issue
+POST /agents/issue
 Authorization: Bearer eyJ...
 Content-Type: application/json
 
@@ -39,7 +39,7 @@ No authentication required — uses the registration token instead.
 The `publicKey` must be a **base64-encoded DER** (SubjectPublicKeyInfo / X.509) RSA public key, minimum 2048 bits.
 
 ```
-POST /credentials/{credentialId}/register-key
+POST /agents/{agentId}/register-key
 Content-Type: application/json
 
 {
@@ -58,12 +58,12 @@ Content-Type: application/json
 }
 ```
 
-## Check Credential Status
+## Check Agent Status
 
 Requires authentication (JWT or API key).
 
 ```
-GET /credentials/{credentialId}/status
+GET /agents/{agentId}/status
 Authorization: Bearer eyJ...
 ```
 
@@ -77,12 +77,12 @@ Authorization: Bearer eyJ...
 }
 ```
 
-## List Credentials
+## List Agents
 
 Requires authentication (JWT or API key).
 
 ```
-GET /credentials
+GET /agents
 Authorization: Bearer eyJ...
 ```
 
@@ -100,12 +100,12 @@ Authorization: Bearer eyJ...
 ]
 ```
 
-## Delete a Credential
+## Delete an Agent
 
 Requires authentication (JWT or API key).
 
 ```
-DELETE /credentials/{credentialId}
+DELETE /agents/{agentId}
 Authorization: Bearer eyJ...
 ```
 
@@ -113,7 +113,7 @@ Authorization: Bearer eyJ...
 
 ```json
 {
-  "message": "Credential deleted"
+  "message": "Agent deleted"
 }
 ```
 

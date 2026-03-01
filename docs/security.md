@@ -21,7 +21,7 @@ Each verification uses a fresh, single-use challenge:
 ## What Tether Stores
 
 - Your email address (for account authentication)
-- Agent names and credential IDs
+- Agent names and agent IDs
 - RSA public keys (for signature verification)
 - Challenge results (challenge ID, verification status, timestamp)
 
@@ -35,8 +35,8 @@ Each verification uses a fresh, single-use challenge:
 ## Recommendations
 
 - Store private keys with restricted file permissions (`chmod 600`)
-- Use environment variables for credential IDs, not hardcoded values
-- Rotate keys periodically by creating new credentials
+- Use environment variables for agent IDs, not hardcoded values
+- Rotate keys periodically by creating new agents
 - Add `*.der`, `*.pem`, and `.env` to your `.gitignore`
 
 ## Reporting Issues
