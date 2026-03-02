@@ -52,7 +52,7 @@ Get your agent verifying its identity in under 5 minutes.
 === "Go"
 
     ```bash
-    go get github.com/tether-name/tether-name-go/v2
+    go get github.com/tether-name/tether-name-go
     ```
 
     ```go
@@ -61,7 +61,7 @@ Get your agent verifying its identity in under 5 minutes.
     import (
         "context"
         "fmt"
-        tether "github.com/tether-name/tether-name-go/v2"
+        tether "github.com/tether-name/tether-name-go"
     )
 
     func main() {

@@ -91,7 +91,7 @@ The private key never leaves the agent's machine.
 === "Go"
 
     ```bash
-    go get github.com/tether-name/tether-name-go/v2
+    go get github.com/tether-name/tether-name-go
     ```
 
 === "CLI"

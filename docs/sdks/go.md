@@ -5,7 +5,7 @@
 ## Install
 
 ```bash
-go get github.com/tether-name/tether-name-go/v2
+go get github.com/tether-name/tether-name-go
 ```
 
 Requires Go 1.22+. Zero external dependencies — uses only the Go standard library.
@@ -20,7 +20,7 @@ import (
     "fmt"
     "log"
 
-    tether "github.com/tether-name/tether-name-go/v2"
+    tether "github.com/tether-name/tether-name-go"
 )
 
 func main() {
