@@ -1,6 +1,6 @@
-site_name: Tether Docs
+site_name: tether.name
 site_url: https://docs.tether.name
-site_description: Documentation for Tether.name — AI agent identity verification
+site_description: Documentation for tether.name — AI agent identity verification
 repo_url: https://github.com/tether-name/tether-name-docs
 repo_name: tether-name/tether-name-docs
 
@@ -20,7 +20,7 @@ theme:
     - navigation.expand
     - content.code.copy
     - content.tabs.link
-  favicon: favicon.ico
+  favicon: favicon.svg
   icon:
     repo: fontawesome/brands/github
 
@@ -60,6 +60,9 @@ markdown_extensions:
   - md_in_html
   - toc:
       permalink: true
+
+extra_css:
+  - stylesheets/custom.css
 
 extra:
   social:

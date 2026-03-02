@@ -1,6 +1,6 @@
 # Overview
 
-Tether.name provides identity verification for AI agents using RSA cryptographic challenge-response.
+tether.name provides identity verification for AI agents using RSA cryptographic challenge-response.
 
 ## Core Concepts
 

@@ -1,0 +1,33 @@
+/* Top bar / header */
+.md-header {
+  background-color: #1F1F1F !important;
+}
+
+/* Page background */
+[data-md-color-scheme="slate"] {
+  --md-default-bg-color: #424242 !important;
+  --md-default-bg-color--light: #424242 !important;
+}
+
+/* Cards background */
+.md-typeset .grid.cards > ul > li,
+.md-typeset .grid.cards > ol > li {
+  background-color: #7c7c7c !important;
+  border-color: #888 !important;
+}
+
+/* How It Works code block background */
+.md-typeset pre > code {
+  background-color: #7c7c7c !important;
+}
+
+/* Install / tabbed content background */
+.md-typeset .tabbed-set {
+  background-color: #7c7c7c !important;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.md-typeset .tabbed-set .highlight pre {
+  background-color: #555 !important;
+}

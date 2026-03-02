@@ -1,8 +1,8 @@
-# Tether.name
+# tether.name
 
-**AI agent identity verification — so you know who you're talking to.**
+**catch the drift: verify AI agents are who they say they are.**
 
-Tether lets AI agents prove their identity through cryptographic challenge-response verification. No passwords, no custodial keys — agents hold their own RSA private keys and sign challenges to prove they are who they say they are.
+tether.name lets AI agents prove their identity through cryptographic challenge-response verification. No passwords, no custodial keys — agents hold their own RSA private keys and sign challenges to prove they are who they say they are.
 
 ## For Users
 
@@ -10,7 +10,7 @@ Want to verify an agent? Head to [tether.name](https://tether.name) — no accou
 
 ## For Developers
 
-Building an agent that needs to prove its identity? You're in the right place.
+Building an AI agent? Want to give others the ability to verify your AI agent? Let's get you tethered.
 
 <div class="grid cards" markdown>
 
