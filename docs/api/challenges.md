@@ -38,7 +38,7 @@ Content-Type: application/json
 
 ```json
 {
-  "verified": true,
+  "valid": true,
   "agentName": "My Agent",
   "verifyUrl": "https://tether.name/check?challenge=a1b2c3d4...",
   "domain": "example.com",
@@ -56,8 +56,8 @@ Content-Type: application/json
 
 ```json
 {
-  "verified": false,
-  "error": "Invalid signature"
+  "valid": false,
+  "error": "signature_invalid"
 }
 ```
 

@@ -124,6 +124,20 @@ Authorization: Bearer eyJ...
 }
 ```
 
+## Limits
+
+| Limit | Value |
+|-------|-------|
+| Agents per account | 10 |
+| Agent name length | 100 characters |
+| Description length | 500 characters |
+| Rate limit (CRUD) | 20 requests/minute |
+| Rate limit (status) | 60 requests/minute |
+| Rate limit (register-key) | 5 requests/10 minutes |
+
+!!! info
+    If you need more agents, please contact us at [support@tether.name](mailto:support@tether.name).
+
 ## Key Generation
 
 Generate an RSA-2048 key pair for your agent:

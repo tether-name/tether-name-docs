@@ -55,9 +55,13 @@ Content-Type: application/json
 
 ```json
 {
-  "accessToken": "eyJ..."
+  "accessToken": "eyJ...",
+  "refreshToken": "eyJ..."
 }
 ```
+
+!!! note
+    Refresh tokens are rotated on each use — the old token is invalidated and a new pair is returned. Always store and use the new `refreshToken` from the response.
 
 ## Using Access Tokens
 
@@ -164,6 +168,16 @@ Authorization: Bearer sk-tether-name-...
 ```
 
 API keys can be used with all agent endpoints (`/agents/*`) and domain endpoints (`/domains/*`). Creating and managing API keys themselves requires JWT authentication.
+
+### Limits
+
+| Limit | Value |
+|-------|-------|
+| API keys per account | 10 |
+| Rate limit | 10 requests/minute |
+
+!!! info
+    If you need more API keys, please contact us at [support@tether.name](mailto:support@tether.name).
 
 ### Security Notes
 
