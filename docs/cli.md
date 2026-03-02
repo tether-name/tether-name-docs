@@ -94,6 +94,12 @@ Create a new agent. Requires an API key.
 tether agent create "my-bot" --description "My helpful bot"
 ```
 
+Assign a verified domain to the agent:
+
+```bash
+tether agent create "my-bot" --domain-id "domain-id-here"
+```
+
 ```bash
 tether agent create "my-bot" --json
 ```
@@ -123,6 +129,20 @@ tether agent delete "agent-id-here"
 ```bash
 tether agent delete "agent-id-here" --json
 ```
+
+### `tether domain list`
+
+List all domains registered to your account. Requires an API key.
+
+```bash
+tether domain list
+```
+
+```bash
+tether domain list --json
+```
+
+Shows each domain's name, verification status, and ID. Use the domain ID with `tether agent create --domain-id` to assign a domain to an agent.
 
 ## Configuration
 
@@ -168,14 +188,21 @@ tether check "the-challenge-code"
 # Create an agent
 tether agent create "my-bot" --description "My helpful assistant"
 
+# Create an agent with a verified domain
+tether domain list                              # find the domain ID
+tether agent create "my-bot" --domain-id "abc123"
+
 # List all agents
 tether agent list
 
 # Delete an agent
 tether agent delete "agent-id"
+
+# List domains
+tether domain list
 ```
 
-Agent management commands require an API key. Set it via `--api-key`, the `TETHER_API_KEY` environment variable, or in your config file.
+Agent and domain management commands require an API key. Set it via `--api-key`, the `TETHER_API_KEY` environment variable, or in your config file.
 
 ## Links
 

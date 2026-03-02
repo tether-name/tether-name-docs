@@ -5,7 +5,7 @@
 ## Install
 
 ```bash
-go get github.com/tether-name/tether-name-go
+go get github.com/tether-name/tether-name-go/v2
 ```
 
 Requires Go 1.22+. Zero external dependencies — uses only the Go standard library.
@@ -20,7 +20,7 @@ import (
     "fmt"
     "log"
 
-    tether "github.com/tether-name/tether-name-go"
+    tether "github.com/tether-name/tether-name-go/v2"
 )
 
 func main() {
@@ -95,6 +95,13 @@ client, err := tether.NewClient(tether.Options{
 agent, err := client.CreateAgent(ctx, "my-bot", "My bot description")
 fmt.Println(agent.ID)
 
+// Create an agent with a verified domain
+domains, err := client.ListDomains(ctx)
+if len(domains) > 0 && domains[0].Verified {
+    agent, err := client.CreateAgent(ctx, "my-bot", "My bot", domains[0].ID)
+    // Verification results will show the domain instead of email
+}
+
 // List all agents
 agents, err := client.ListAgents(ctx)
 
@@ -103,15 +110,35 @@ deleted, err := client.DeleteAgent(ctx, agent.ID)
 fmt.Println(deleted)
 ```
 
+## Domain Management
+
+List domains registered to your account. Domains are claimed and verified via the [web dashboard](https://tether.name/dashboard) or [API](../api/domains.md), then referenced by ID when creating agents.
+
+```go
+client, err := tether.NewClient(tether.Options{
+    ApiKey: "sk-tether-name-...",
+})
+
+// List all domains
+domains, err := client.ListDomains(ctx)
+for _, domain := range domains {
+    status := "pending"
+    if domain.Verified {
+        status = "verified"
+    }
+    fmt.Printf("%s — %s\n", domain.Domain, status)
+}
+```
+
 ## API
 
 ### `tether.NewClient(opts Options) (*TetherClient, error)`
 
 Creates a new client. Returns an error if neither `ApiKey` nor `AgentID` is provided.
 
-### `client.CreateAgent(ctx, agentName, description) (*Agent, error)`
+### `client.CreateAgent(ctx, agentName, description, domainID...) (*Agent, error)`
 
-Create a new agent. Requires API key auth.
+Create a new agent. Optionally pass a verified domain ID as the last argument. Requires API key auth.
 
 ### `client.ListAgents(ctx) ([]Agent, error)`
 
@@ -120,6 +147,10 @@ List all agents. Requires API key auth.
 ### `client.DeleteAgent(ctx, agentID) (bool, error)`
 
 Delete an agent. Requires API key auth.
+
+### `client.ListDomains(ctx) ([]Domain, error)`
+
+List all registered domains for the authenticated account. Requires API key auth.
 
 ### `client.Verify(ctx) (*VerificationResult, error)`
 
@@ -147,9 +178,30 @@ type VerificationResult struct {
     AgentName       string
     VerifyURL       string
     Email           string
+    Domain          string     // Verified domain (if assigned to this agent)
     RegisteredSince *EpochTime
     Error           string
     Challenge       string
+}
+
+type Agent struct {
+    ID                string
+    AgentName         string
+    Description       string
+    DomainID          string
+    Domain            string
+    CreatedAt         int64
+    RegistrationToken string
+    LastVerifiedAt    int64
+}
+
+type Domain struct {
+    ID            string
+    Domain        string
+    Verified      bool
+    VerifiedAt    int64
+    LastCheckedAt int64
+    CreatedAt     int64
 }
 ```
 

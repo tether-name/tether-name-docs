@@ -116,9 +116,27 @@ Authorization: Bearer eyJ...
 }
 ```
 
+## Assigning Domains to Agents
+
+Once a domain is verified, you can assign it to individual agents when creating them:
+
+```
+POST /agents/issue
+Authorization: Bearer eyJ...
+Content-Type: application/json
+
+{
+  "agentName": "My Agent",
+  "description": "...",
+  "domainId": "abc123def456"
+}
+```
+
+The `domainId` must reference a verified domain owned by the authenticated account.
+
 ## How It Affects Verification
 
-Once a domain is verified, the [challenge verify response](challenges.md#verify-a-challenge) and [challenge status](challenges.md#check-challenge-status) will include `domain` instead of `email`:
+When an agent has a domain assigned, the [challenge verify response](challenges.md#verify-a-challenge) and [challenge status](challenges.md#check-challenge-status) will include `domain` instead of `email`:
 
 ```json
 {
@@ -130,7 +148,7 @@ Once a domain is verified, the [challenge verify response](challenges.md#verify-
 }
 ```
 
-This applies to **all agents** under the account with the verified domain.
+Only agents with an explicitly assigned `domainId` will show the domain. Agents without a domain assignment will continue showing `email`.
 
 ## Re-verification (Admin)
 

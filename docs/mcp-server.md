@@ -24,12 +24,16 @@ Add to `claude_desktop_config.json`:
       "args": ["-y", "tether-name-mcp-server"],
       "env": {
         "TETHER_AGENT_ID": "your-agent-id",
-        "TETHER_PRIVATE_KEY_PATH": "/path/to/private-key.der"
+        "TETHER_PRIVATE_KEY_PATH": "/path/to/private-key.der",
+        "TETHER_API_KEY": "sk-tether-name-..."
       }
     }
   }
 }
 ```
+
+!!! tip
+    `TETHER_API_KEY` is only needed for agent management tools (`create_agent`, `list_agents`, `delete_agent`, `list_domains`). Verification tools only need `TETHER_AGENT_ID` and `TETHER_PRIVATE_KEY_PATH`.
 
 ### Cursor
 
@@ -73,6 +77,8 @@ Add to `.vscode/mcp.json`:
 
 ## Tools
 
+### Verification
+
 | Tool | Description |
 |---|---|
 | `verify_identity` | Complete verification flow — requests a challenge, signs it, submits proof |
@@ -81,12 +87,24 @@ Add to `.vscode/mcp.json`:
 | `submit_proof` | Submit a signed proof for verification |
 | `get_agent_info` | Show configured agent ID and key path |
 
+### Agent Management
+
+These tools require `TETHER_API_KEY` to be set.
+
+| Tool | Description |
+|---|---|
+| `create_agent` | Create a new agent (with optional domain assignment) |
+| `list_agents` | List all agents for the authenticated account |
+| `delete_agent` | Delete an agent by ID |
+| `list_domains` | List all registered domains |
+
 ## Environment Variables
 
 | Variable | Required | Description |
 |---|---|---|
-| `TETHER_AGENT_ID` | ✅ | Your Tether agent ID |
-| `TETHER_PRIVATE_KEY_PATH` | ✅ | Path to RSA private key (DER or PEM) |
+| `TETHER_AGENT_ID` | For verification | Your Tether agent ID |
+| `TETHER_PRIVATE_KEY_PATH` | For verification | Path to RSA private key (DER or PEM) |
+| `TETHER_API_KEY` | For management | API key for agent/domain management |
 
 ## Security
 

@@ -73,6 +73,13 @@ client = TetherClient(api_key="sk-tether-name-...")
 agent = client.create_agent("my-bot", "My bot description")
 print(agent.id)
 
+# Create an agent with a verified domain
+domains = client.list_domains()
+verified = [d for d in domains if d.verified]
+if verified:
+    agent = client.create_agent("my-bot", "My bot", domain_id=verified[0].id)
+    # Verification results will show the domain instead of email
+
 # List all agents
 agents = client.list_agents()
 
@@ -80,11 +87,25 @@ agents = client.list_agents()
 client.delete_agent(agent.id)
 ```
 
+## Domain Management
+
+List domains registered to your account. Domains are claimed and verified via the [web dashboard](https://tether.name/dashboard) or [API](../api/domains.md), then referenced by ID when creating agents.
+
+```python
+client = TetherClient(api_key="sk-tether-name-...")
+
+# List all domains
+domains = client.list_domains()
+for domain in domains:
+    status = "verified" if domain.verified else "pending"
+    print(f"{domain.domain} — {status}")
+```
+
 ## API
 
-### `client.create_agent(name, description="") -> Agent`
+### `client.create_agent(name, description="", domain_id="") -> Agent`
 
-Create a new agent.
+Create a new agent. Optionally assign a verified domain by passing its ID.
 
 ### `client.list_agents() -> list[Agent]`
 
@@ -93,6 +114,10 @@ List all agents.
 ### `client.delete_agent(agent_id) -> bool`
 
 Delete an agent.
+
+### `client.list_domains() -> list[Domain]`
+
+List all registered domains for the authenticated account.
 
 ### `client.verify() -> VerificationResult`
 
@@ -125,9 +150,30 @@ class VerificationResult:
     agent_name: Optional[str]
     verify_url: Optional[str]
     email: Optional[str]
+    domain: Optional[str]  # Verified domain (if assigned to this agent)
     registered_since: Optional[datetime]
     error: Optional[str]
     challenge: Optional[str]
+
+@dataclass
+class Agent:
+    id: str
+    agent_name: str
+    description: str
+    domain_id: str
+    domain: Optional[str]
+    created_at: int  # epoch ms
+    registration_token: str
+    last_verified_at: int
+
+@dataclass
+class Domain:
+    id: str
+    domain: str
+    verified: bool
+    verified_at: int
+    last_checked_at: int
+    created_at: int
 ```
 
 ## Error Handling
