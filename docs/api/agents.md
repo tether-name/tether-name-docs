@@ -13,7 +13,8 @@ Content-Type: application/json
 
 {
   "agentName": "My Agent",
-  "description": "Optional description for this agent"
+  "description": "Optional description for this agent",
+  "domainId": "optional-verified-domain-id"
 }
 ```
 
@@ -24,6 +25,7 @@ Content-Type: application/json
   "id": "rgUOzbqar8z0Ag9RZH5I",
   "agentName": "My Agent",
   "description": "Optional description for this agent",
+  "domainId": "optional-verified-domain-id",
   "createdAt": 1736899200000,
   "registrationToken": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 }
@@ -31,6 +33,9 @@ Content-Type: application/json
 
 !!! warning
     The `registrationToken` is shown only once. Save it — you'll need it to register your public key. It expires after 5 minutes.
+
+!!! info
+    `domainId` is optional. If provided, it must reference one of your **verified** domains. This lets you choose which domain this specific agent should display on verification results.
 
 ## Register a Public Key
 
@@ -94,6 +99,8 @@ Authorization: Bearer eyJ...
     "id": "rgUOzbqar8z0Ag9RZH5I",
     "agentName": "My Agent",
     "description": "Optional description",
+    "domainId": "optional-verified-domain-id",
+    "domain": "example.com",
     "createdAt": 1736899200000,
     "lastVerifiedAt": 1736985600000
   }
