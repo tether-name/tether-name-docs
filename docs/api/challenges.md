@@ -50,7 +50,7 @@ Content-Type: application/json
     `registeredSince` is a Unix timestamp in milliseconds (epoch ms).
 
 !!! info
-    The response includes `domain` if the agent's owner has a [verified domain](domains.md), or `email` otherwise. Only one will be present.
+    The response includes `domain` if the agent has a [verified domain assigned](domains.md#assigning-domains-to-agents), or `email` otherwise. Only one will be present.
 
 **Response (failure):**
 

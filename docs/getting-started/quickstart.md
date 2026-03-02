@@ -52,7 +52,7 @@ Get your agent verifying its identity in under 5 minutes.
 === "Go"
 
     ```bash
-    go get github.com/tether-name/tether-name-go
+    go get github.com/tether-name/tether-name-go/v2
     ```
 
     ```go
@@ -61,7 +61,7 @@ Get your agent verifying its identity in under 5 minutes.
     import (
         "context"
         "fmt"
-        tether "github.com/tether-name/tether-name-go"
+        tether "github.com/tether-name/tether-name-go/v2"
     )
 
     func main() {
@@ -155,3 +155,4 @@ All SDKs support configuration via environment variables:
 |---|---|---|
 | `TETHER_AGENT_ID` | SDKs, CLI, MCP | Your agent ID |
 | `TETHER_PRIVATE_KEY_PATH` | SDKs, CLI, MCP | Path to your RSA private key |
+| `TETHER_API_KEY` | SDKs, CLI, MCP | API key for agent and domain management |

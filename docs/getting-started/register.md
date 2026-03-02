@@ -73,7 +73,7 @@ Expected response:
 === "Go"
 
     ```go
-    import tether "github.com/tether-name/tether-name-go"
+    import tether "github.com/tether-name/tether-name-go/v2"
 
     client, err := tether.NewClient(tether.Options{
         AgentID:   "your-agent-id",

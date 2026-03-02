@@ -24,6 +24,7 @@ Each verification uses a fresh, single-use challenge:
 - Agent names and agent IDs
 - RSA public keys (for signature verification)
 - Challenge results (challenge ID, verification status, timestamp)
+- Domain claims and verification status (for [domain verification](api/domains.md))
 
 ## What Tether Does NOT Store
 
