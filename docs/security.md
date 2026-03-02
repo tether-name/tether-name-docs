@@ -42,4 +42,4 @@ Each verification uses a fresh, single-use challenge:
 
 ## Reporting Issues
 
-Found a security issue? Email [jawnnypoo@gmail.com](mailto:jawnnypoo@gmail.com).
+Found a security issue? Email [security@tether.name](mailto:security@tether.name).
