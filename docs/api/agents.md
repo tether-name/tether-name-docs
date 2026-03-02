@@ -35,7 +35,7 @@ Content-Type: application/json
     The `registrationToken` is shown only once. Save it — you'll need it to register your public key. It expires after 5 minutes.
 
 !!! info
-    `domainId` is optional. If provided, it must reference one of your **verified** domains. This lets you choose which domain this specific agent should display on verification results.
+    `domainId` is optional. If provided, it must reference one of your **verified** domains. This agent will then display **that exact domain** on verification results. If omitted, verification falls back to the owner's email (no automatic domain fallback).
 
 ## Register a Public Key
 
