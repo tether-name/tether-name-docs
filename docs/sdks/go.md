@@ -108,6 +108,23 @@ agents, err := client.ListAgents(ctx)
 // Delete an agent
 deleted, err := client.DeleteAgent(ctx, agent.ID)
 fmt.Println(deleted)
+
+// List key lifecycle entries
+keys, err := client.ListAgentKeys(ctx, agent.ID)
+fmt.Println(len(keys))
+
+// Rotate key (requires step-up)
+rotated, err := client.RotateAgentKey(ctx, agent.ID, tether.RotateAgentKeyRequest{
+    PublicKey: "BASE64_SPKI_PUBLIC_KEY",
+    GracePeriodHours: 24,
+    StepUpCode: "123456", // or Challenge + Proof
+})
+
+// Revoke a key
+_, err = client.RevokeAgentKey(ctx, agent.ID, rotated.NewKeyID, tether.RevokeAgentKeyRequest{
+    Reason: "compromised",
+    StepUpCode: "654321",
+})
 ```
 
 ## Domain Management
@@ -151,6 +168,18 @@ Delete an agent. Requires API key auth.
 ### `client.ListDomains(ctx) ([]Domain, error)`
 
 List all registered domains for the authenticated account. Requires API key auth.
+
+### `client.ListAgentKeys(ctx, agentID) ([]AgentKey, error)`
+
+List key lifecycle entries (`active`, `grace`, `revoked`) for an agent. Requires API key auth.
+
+### `client.RotateAgentKey(ctx, agentID, req) (*RotateAgentKeyResponse, error)`
+
+Rotate an agent key. Requires API key auth plus step-up verification via either `StepUpCode` or `Challenge` + `Proof`.
+
+### `client.RevokeAgentKey(ctx, agentID, keyID, req) (*RevokeAgentKeyResponse, error)`
+
+Revoke an agent key. Requires API key auth plus step-up verification via either `StepUpCode` or `Challenge` + `Proof`.
 
 ### `client.Verify(ctx) (*VerificationResult, error)`
 
@@ -202,6 +231,16 @@ type Domain struct {
     VerifiedAt    int64
     LastCheckedAt int64
     CreatedAt     int64
+}
+
+type AgentKey struct {
+    ID            string
+    Status        string // active | grace | revoked
+    CreatedAt     int64
+    ActivatedAt   int64
+    GraceUntil    int64
+    RevokedAt     int64
+    RevokedReason string
 }
 ```
 

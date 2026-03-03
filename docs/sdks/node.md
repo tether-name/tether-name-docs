@@ -78,6 +78,23 @@ const agents = await client.listAgents();
 
 // Delete an agent
 await client.deleteAgent(agent.id);
+
+// List key lifecycle entries for an agent
+const keys = await client.listAgentKeys(agent.id);
+
+// Rotate key (requires step-up: stepUpCode OR challenge+proof)
+const rotated = await client.rotateAgentKey(agent.id, {
+  publicKey: 'BASE64_SPKI_PUBLIC_KEY',
+  gracePeriodHours: 24,
+  reason: 'routine_rotation',
+  stepUpCode: '123456',
+});
+
+// Revoke a specific key
+await client.revokeAgentKey(agent.id, rotated.newKeyId, {
+  reason: 'compromised',
+  stepUpCode: '654321',
+});
 ```
 
 ## Domain Management
@@ -119,6 +136,24 @@ Returns: `Promise<boolean>`
 List all registered domains for the authenticated account.
 
 Returns: `Promise<Domain[]>`
+
+### `client.listAgentKeys(agentId)`
+
+List key lifecycle entries (`active`, `grace`, `revoked`) for an agent.
+
+Returns: `Promise<AgentKey[]>`
+
+### `client.rotateAgentKey(agentId, request)`
+
+Rotate an agent key. Requires API key auth plus step-up verification via either `stepUpCode` or `challenge` + `proof`.
+
+Returns: `Promise<RotateAgentKeyResponse>`
+
+### `client.revokeAgentKey(agentId, keyId, request?)`
+
+Revoke a key. Requires API key auth plus step-up verification via either `stepUpCode` or `challenge` + `proof`.
+
+Returns: `Promise<RevokeAgentKeyResponse>`
 
 ### `client.verify()`
 
@@ -176,6 +211,32 @@ interface Domain {
   verifiedAt: number;
   lastCheckedAt: number;
   createdAt: number;
+}
+
+interface AgentKey {
+  id: string;
+  status: 'active' | 'grace' | 'revoked';
+  createdAt: number;
+  activatedAt: number;
+  graceUntil: number;
+  revokedAt: number;
+  revokedReason: string;
+}
+
+interface RotateAgentKeyRequest {
+  publicKey: string;
+  gracePeriodHours?: number;
+  reason?: string;
+  stepUpCode?: string;
+  challenge?: string;
+  proof?: string;
+}
+
+interface RevokeAgentKeyRequest {
+  reason?: string;
+  stepUpCode?: string;
+  challenge?: string;
+  proof?: string;
 }
 ```
 

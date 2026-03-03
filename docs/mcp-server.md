@@ -33,7 +33,7 @@ Add to `claude_desktop_config.json`:
 ```
 
 !!! tip
-    `TETHER_API_KEY` is only needed for agent management tools (`create_agent`, `list_agents`, `delete_agent`, `list_domains`). Verification tools only need `TETHER_AGENT_ID` and `TETHER_PRIVATE_KEY_PATH`.
+    `TETHER_API_KEY` is only needed for management tools (`create_agent`, `list_agents`, `delete_agent`, `list_domains`, `list_agent_keys`, `rotate_agent_key`, `revoke_agent_key`). Verification tools only need `TETHER_AGENT_ID` and `TETHER_PRIVATE_KEY_PATH`.
 
 ### Cursor
 
@@ -97,6 +97,9 @@ These tools require `TETHER_API_KEY` to be set.
 | `list_agents` | List all agents for the authenticated account |
 | `delete_agent` | Delete an agent by ID |
 | `list_domains` | List all registered domains |
+| `list_agent_keys` | List key lifecycle entries (`active`, `grace`, `revoked`) for an agent |
+| `rotate_agent_key` | Rotate an agent key (requires `stepUpCode` or `challenge` + `proof`) |
+| `revoke_agent_key` | Revoke an agent key (requires `stepUpCode` or `challenge` + `proof`) |
 
 ## Environment Variables
 
@@ -105,6 +108,7 @@ These tools require `TETHER_API_KEY` to be set.
 | `TETHER_AGENT_ID` | For verification | Your Tether agent ID |
 | `TETHER_PRIVATE_KEY_PATH` | For verification | Path to RSA private key (DER or PEM) |
 | `TETHER_API_KEY` | For management | API key for agent/domain management |
+| `TETHER_API_URL` | Optional | Override API URL (default: `https://api.tether.name`) |
 
 ## Security
 

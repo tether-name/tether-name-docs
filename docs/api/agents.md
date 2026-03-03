@@ -63,6 +63,9 @@ Content-Type: application/json
 }
 ```
 
+!!! info
+    `register-key` is for first key registration only. After initial setup, use key lifecycle endpoints (`/agents/{agentId}/keys/rotate`, `/agents/{agentId}/keys/{keyId}/revoke`).
+
 ## Check Agent Status
 
 Requires authentication (JWT or API key).
@@ -79,6 +82,95 @@ Authorization: Bearer eyJ...
   "id": "rgUOzbqar8z0Ag9RZH5I",
   "agentName": "My Agent",
   "registered": true
+}
+```
+
+## List Agent Keys
+
+Requires JWT authentication.
+
+```
+GET /agents/{agentId}/keys
+Authorization: Bearer eyJ...
+```
+
+**Response:**
+
+```json
+[
+  {
+    "id": "key_abc",
+    "status": "active",
+    "createdAt": 1736899200000,
+    "activatedAt": 1736899200000,
+    "graceUntil": 0,
+    "revokedAt": 0,
+    "revokedReason": ""
+  }
+]
+```
+
+## Rotate Agent Key
+
+Requires JWT authentication **plus step-up verification**.
+
+Provide one of:
+- `stepUpCode` (email code from auth flow), or
+- `challenge` + `proof` (signed by an active/grace key)
+
+```
+POST /agents/{agentId}/keys/rotate
+Authorization: Bearer eyJ...
+Content-Type: application/json
+
+{
+  "publicKey": "MIIBIjANBgkqhki...",
+  "gracePeriodHours": 24,
+  "reason": "routine_rotation",
+  "stepUpCode": "123456"
+}
+```
+
+**Response:**
+
+```json
+{
+  "agentId": "rgUOzbqar8z0Ag9RZH5I",
+  "previousKeyId": "key_old",
+  "newKeyId": "key_new",
+  "graceUntil": 1736985600000,
+  "message": "Key rotated successfully"
+}
+```
+
+## Revoke Agent Key
+
+Requires JWT authentication **plus step-up verification**.
+
+Provide one of:
+- `stepUpCode`, or
+- `challenge` + `proof`
+
+```
+POST /agents/{agentId}/keys/{keyId}/revoke
+Authorization: Bearer eyJ...
+Content-Type: application/json
+
+{
+  "reason": "compromised",
+  "stepUpCode": "123456"
+}
+```
+
+**Response:**
+
+```json
+{
+  "agentId": "rgUOzbqar8z0Ag9RZH5I",
+  "keyId": "key_new",
+  "revoked": true,
+  "promotedKeyId": "key_old",
+  "message": "Key revoked. A grace key was promoted to active"
 }
 ```
 
@@ -134,6 +226,8 @@ Authorization: Bearer eyJ...
 | Rate limit (CRUD) | 20 requests/minute |
 | Rate limit (status) | 60 requests/minute |
 | Rate limit (register-key) | 5 requests/10 minutes |
+| Rate limit (keys rotate) | 3 requests/10 minutes |
+| Rate limit (keys revoke) | 3 requests/10 minutes |
 
 !!! info
     If you need more agents, please contact us at [support@tether.name](mailto:support@tether.name).

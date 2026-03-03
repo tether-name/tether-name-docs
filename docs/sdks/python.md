@@ -85,6 +85,22 @@ agents = client.list_agents()
 
 # Delete an agent
 client.delete_agent(agent.id)
+
+# Key lifecycle operations
+keys = client.list_agent_keys(agent.id)
+rotated = client.rotate_agent_key(
+    agent.id,
+    public_key="BASE64_SPKI_PUBLIC_KEY",
+    grace_period_hours=24,
+    reason="routine_rotation",
+    step_up_code="123456",  # or challenge+proof
+)
+client.revoke_agent_key(
+    agent.id,
+    rotated.new_key_id,
+    reason="compromised",
+    step_up_code="654321",  # or challenge+proof
+)
 ```
 
 ## Domain Management
@@ -118,6 +134,18 @@ Delete an agent.
 ### `client.list_domains() -> list[Domain]`
 
 List all registered domains for the authenticated account.
+
+### `client.list_agent_keys(agent_id) -> list[AgentKey]`
+
+List key lifecycle entries (`active`, `grace`, `revoked`) for an agent.
+
+### `client.rotate_agent_key(...) -> RotateKeyResult`
+
+Rotate an agent key. Requires API key auth plus step-up verification via either `step_up_code` or `challenge` + `proof`.
+
+### `client.revoke_agent_key(...) -> RevokeKeyResult`
+
+Revoke an agent key. Requires API key auth plus step-up verification via either `step_up_code` or `challenge` + `proof`.
 
 ### `client.verify() -> VerificationResult`
 
@@ -174,6 +202,16 @@ class Domain:
     verified_at: int
     last_checked_at: int
     created_at: int
+
+@dataclass
+class AgentKey:
+    id: str
+    status: str
+    created_at: int
+    activated_at: int
+    grace_until: int
+    revoked_at: int
+    revoked_reason: str = ""
 ```
 
 ## Error Handling
