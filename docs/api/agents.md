@@ -87,10 +87,7 @@ Authorization: Bearer eyJ...
 
 ## List Agent Keys
 
-Requires JWT authentication.
-
-!!! warning
-    API keys are not accepted for key lifecycle endpoints. Use a JWT access token from the auth flow.
+Requires authentication (JWT or API key).
 
 ```
 GET /agents/{agentId}/keys
@@ -115,14 +112,14 @@ Authorization: Bearer eyJ...
 
 ## Rotate Agent Key
 
-Requires JWT authentication **plus step-up verification**.
-
-!!! warning
-    API keys are not accepted for this endpoint.
+Requires authentication (JWT or API key) **plus step-up verification**.
 
 Provide one of:
 - `stepUpCode` (email code from auth flow), or
 - `challenge` + `proof` (signed by an active/grace key)
+
+!!! tip
+    For CI/agent automation with API keys, prefer `challenge` + `proof` step-up.
 
 ```
 POST /agents/{agentId}/keys/rotate
@@ -151,14 +148,14 @@ Content-Type: application/json
 
 ## Revoke Agent Key
 
-Requires JWT authentication **plus step-up verification**.
-
-!!! warning
-    API keys are not accepted for this endpoint.
+Requires authentication (JWT or API key) **plus step-up verification**.
 
 Provide one of:
 - `stepUpCode`, or
 - `challenge` + `proof`
+
+!!! tip
+    For CI/agent automation with API keys, prefer `challenge` + `proof` step-up.
 
 ```
 POST /agents/{agentId}/keys/{keyId}/revoke

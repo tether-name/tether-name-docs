@@ -224,8 +224,10 @@ Authorization: Bearer sk-tether-name-...
 
 API keys can be used with most agent endpoints (`/agents/*`) and domain endpoints (`/domains/*`). Creating and managing API keys themselves requires JWT authentication.
 
-!!! warning
-    Key lifecycle endpoints (`GET /agents/{id}/keys`, `POST /agents/{id}/keys/rotate`, `POST /agents/{id}/keys/{keyId}/revoke`) require a JWT access token plus step-up verification where applicable.
+!!! note
+    Key lifecycle endpoints (`GET /agents/{id}/keys`, `POST /agents/{id}/keys/rotate`, `POST /agents/{id}/keys/{keyId}/revoke`) accept bearer auth (JWT or API key). Rotation/revocation require step-up verification (`stepUpCode` or `challenge` + `proof`).
+
+    For automation with API keys, prefer `challenge` + `proof` step-up.
 
 ### Limits
 

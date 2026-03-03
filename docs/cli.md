@@ -136,7 +136,7 @@ tether agent delete "agent-id-here" --json
 
 List key lifecycle entries (`active`, `grace`, `revoked`) for an agent.
 
-Requires JWT access token auth (API keys are rejected by this endpoint).
+Requires bearer auth (JWT or API key).
 
 ```bash
 tether agent keys "agent-id"
@@ -145,7 +145,7 @@ tether agent keys "agent-id" --json
 
 ### `tether agent rotate-key <agentId>`
 
-Rotate an agent key. Requires JWT access token auth plus step-up verification via either:
+Rotate an agent key. Requires bearer auth (JWT or API key) plus step-up verification via either:
 - `--step-up-code`, or
 - `--challenge` + `--proof`
 
@@ -158,7 +158,7 @@ tether agent rotate-key "agent-id" \
 
 ### `tether agent revoke-key <agentId> <keyId>`
 
-Revoke a specific key. Requires JWT access token auth plus step-up verification via either:
+Revoke a specific key. Requires bearer auth (JWT or API key) plus step-up verification via either:
 - `--step-up-code`, or
 - `--challenge` + `--proof`
 
@@ -169,7 +169,7 @@ tether agent revoke-key "agent-id" "key-id" \
 ```
 
 !!! tip
-    The CLI flag/env name is still `--api-key` / `TETHER_API_KEY`, but for key lifecycle endpoints you should supply a JWT access token value there.
+    The CLI flag/env name is still `--api-key` / `TETHER_API_KEY`. For key lifecycle endpoints in automation, prefer `--challenge` + `--proof` step-up with your API key.
 
 ### `tether domain list`
 
@@ -248,7 +248,7 @@ tether agent delete "agent-id"
 tether domain list
 ```
 
-Agent and domain management commands require a bearer token. Use an API key for standard CRUD operations. For key lifecycle endpoints (`agent keys`, `rotate-key`, `revoke-key`), use a JWT access token. Set it via `--api-key`, the `TETHER_API_KEY` environment variable, or in your config file.
+Agent and domain management commands require a bearer token. API keys work for standard CRUD and key lifecycle endpoints; key lifecycle mutations (`rotate-key`, `revoke-key`) also require step-up verification. Set your bearer token via `--api-key`, the `TETHER_API_KEY` environment variable, or in your config file.
 
 ## Links
 
