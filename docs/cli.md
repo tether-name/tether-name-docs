@@ -28,10 +28,10 @@ tether init
 
 This saves your configuration to `~/.tether/config.json`.
 
-If you choose to generate keys, it creates:
+If you choose to generate keys, it creates files in `~/.tether/keys/` (outside your current working directory) to reduce accidental git commits:
 
-- `.tether-private-key.pem` (private key, `chmod 600`)
-- `.tether-public-key.pem` (public key, for registering with Tether)
+- `~/.tether/keys/<agent>.private.pem` (private key, `chmod 600`)
+- `~/.tether/keys/<agent>.public.pem` (public key, for registering with Tether)
 
 ### `tether verify`
 
