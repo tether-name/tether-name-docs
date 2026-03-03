@@ -156,7 +156,7 @@ Verified domains are periodically re-checked via an admin endpoint. If the DNS T
 
 ```
 POST /admin/domain-reverify
-Authorization: Bearer <ADMIN_SECRET>
+Authorization: Bearer <admin JWT>
 ```
 
 **Response:**
@@ -176,6 +176,8 @@ Authorization: Bearer <ADMIN_SECRET>
 ```
 
 This endpoint is designed to be called by an external cron job (e.g. daily or weekly). Revoked domains can be re-verified by the owner at any time from their dashboard once the TXT record is restored.
+
+Admin auth is configured server-side via allowlists (`ADMIN_USER_IDS` / `ADMIN_EMAILS`). Legacy `ADMIN_SECRET` bearer auth may still be enabled for backward compatibility.
 
 ## Limits
 
