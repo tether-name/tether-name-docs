@@ -19,7 +19,7 @@ Content-Type: application/json
 
 A magic code is sent to the provided email.
 
-### Exchange Code for Tokens
+### Exchange Code for Tokens (manual entry flow)
 
 ```
 POST /auth/verify-code
@@ -40,7 +40,29 @@ Content-Type: application/json
 }
 ```
 
-### Refresh Token
+### Exchange One-Time Magic Link Token
+
+When users click the magic link from email, clients can exchange the opaque token directly (without exposing email/code in the URL):
+
+```
+POST /auth/exchange-code
+Content-Type: application/json
+
+{
+  "token": "opaque-one-time-token"
+}
+```
+
+**Response:**
+
+```json
+{
+  "accessToken": "eyJ...",
+  "refreshToken": "eyJ..."
+}
+```
+
+### Refresh Token (body mode)
 
 ```
 POST /auth/refresh
@@ -58,6 +80,26 @@ Content-Type: application/json
   "accessToken": "eyJ...",
   "refreshToken": "eyJ..."
 }
+```
+
+### Browser Cookie Session Mode (recommended for web apps)
+
+For browser clients, use cookie mode so refresh tokens are never readable by JavaScript:
+
+- Send header `X-Tether-Session-Mode: cookie` on:
+  - `POST /auth/verify-code`
+  - `POST /auth/exchange-code`
+  - `POST /auth/refresh`
+  - `POST /auth/logout`
+- Include credentials in browser requests.
+- API sets `tether_refresh_token` as an httpOnly cookie.
+- In cookie mode, `refreshToken` in JSON responses is blank (use cookie rotation instead).
+
+Cookie-mode refresh call:
+
+```
+POST /auth/refresh
+X-Tether-Session-Mode: cookie
 ```
 
 !!! note
@@ -82,9 +124,22 @@ Returns the currently authenticated user's info.
 
 ### Logout
 
+Body mode:
+
 ```
 POST /auth/logout
-Authorization: Bearer eyJ...
+Content-Type: application/json
+
+{
+  "refreshToken": "eyJ..."
+}
+```
+
+Cookie mode:
+
+```
+POST /auth/logout
+X-Tether-Session-Mode: cookie
 ```
 
 Invalidates the current session.
@@ -193,3 +248,4 @@ The following endpoints do **not** require authentication:
 - `POST /challenge` — Request a challenge
 - `POST /challenge/verify` — Submit proof
 - `GET /challenge/{code}` — Check challenge status
+- `GET /.well-known/tether-name.json` — Machine-readable endpoint map and protocol metadata
