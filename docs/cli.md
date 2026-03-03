@@ -33,6 +33,8 @@ If you choose to generate keys, it creates files in `~/.tether/keys/` (outside y
 - `~/.tether/keys/<agent>.private.pem` (private key, `chmod 600`)
 - `~/.tether/keys/<agent>.public.pem` (public key, for registering with Tether)
 
+If you manually set a key path inside a git repository, `tether init` prints a safety warning.
+
 ### `tether verify`
 
 Perform a full identity verification — requests a challenge, signs it, submits proof, and displays the result.
