@@ -177,7 +177,11 @@ Authorization: Bearer <admin JWT>
 
 This endpoint is designed to be called by an external cron job (e.g. daily or weekly). Revoked domains can be re-verified by the owner at any time from their dashboard once the TXT record is restored.
 
-Admin auth is configured server-side via allowlists (`ADMIN_USER_IDS` / `ADMIN_EMAILS`). Legacy `ADMIN_SECRET` bearer auth may still be enabled for backward compatibility.
+Admin auth is configured server-side via allowlists:
+- user allowlists: `ADMIN_USER_IDS` / `ADMIN_EMAILS`
+- Google OIDC service accounts for schedulers: `ADMIN_OIDC_SERVICE_ACCOUNTS` (+ optional `ADMIN_OIDC_AUDIENCE`)
+
+Legacy `ADMIN_SECRET` bearer auth may still be enabled for backward compatibility.
 
 ## Limits
 
