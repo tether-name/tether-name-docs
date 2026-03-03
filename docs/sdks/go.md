@@ -63,7 +63,8 @@ result, err := client.SubmitProof(ctx, challenge, proof)
 client, err := tether.NewClient(tether.Options{
     // Authentication — choose one:
 
-    // Option 1: API key (for agent management and agent operations)
+    // Option 1: Management bearer token (API key or JWT)
+    // For key lifecycle endpoints (list/rotate/revoke), use a JWT access token.
     ApiKey: "sk-tether-name-...",
 
     // Option 2: Agent + private key (for verification and signing)
@@ -78,7 +79,7 @@ When `ApiKey` is set, `AgentID` and private key options become optional. A priva
 
 Environment variables:
 
-- `TETHER_API_KEY`
+- `TETHER_API_KEY` (management bearer token; API key or JWT)
 - `TETHER_AGENT_ID`
 - `TETHER_PRIVATE_KEY_PATH`
 
@@ -109,6 +110,8 @@ agents, err := client.ListAgents(ctx)
 deleted, err := client.DeleteAgent(ctx, agent.ID)
 fmt.Println(deleted)
 
+// Key lifecycle endpoints require JWT auth (not API key).
+// You can pass a JWT access token in Options.ApiKey for these calls.
 // List key lifecycle entries
 keys, err := client.ListAgentKeys(ctx, agent.ID)
 fmt.Println(len(keys))
@@ -171,15 +174,15 @@ List all registered domains for the authenticated account. Requires API key auth
 
 ### `client.ListAgentKeys(ctx, agentID) ([]AgentKey, error)`
 
-List key lifecycle entries (`active`, `grace`, `revoked`) for an agent. Requires API key auth.
+List key lifecycle entries (`active`, `grace`, `revoked`) for an agent. Requires JWT access token auth.
 
 ### `client.RotateAgentKey(ctx, agentID, req) (*RotateAgentKeyResponse, error)`
 
-Rotate an agent key. Requires API key auth plus step-up verification via either `StepUpCode` or `Challenge` + `Proof`.
+Rotate an agent key. Requires JWT access token auth plus step-up verification via either `StepUpCode` or `Challenge` + `Proof`.
 
 ### `client.RevokeAgentKey(ctx, agentID, keyID, req) (*RevokeAgentKeyResponse, error)`
 
-Revoke an agent key. Requires API key auth plus step-up verification via either `StepUpCode` or `Challenge` + `Proof`.
+Revoke an agent key. Requires JWT access token auth plus step-up verification via either `StepUpCode` or `Challenge` + `Proof`.
 
 ### `client.Verify(ctx) (*VerificationResult, error)`
 

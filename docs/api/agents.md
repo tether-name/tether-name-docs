@@ -1,6 +1,6 @@
 # Agents
 
-Agents represent a registered AI agent. Each agent has a unique ID and an associated RSA public key.
+Agents represent a registered AI agent. Each agent has a unique ID and key lifecycle history (active, grace, revoked RSA public keys).
 
 ## Create an Agent
 
@@ -89,6 +89,9 @@ Authorization: Bearer eyJ...
 
 Requires JWT authentication.
 
+!!! warning
+    API keys are not accepted for key lifecycle endpoints. Use a JWT access token from the auth flow.
+
 ```
 GET /agents/{agentId}/keys
 Authorization: Bearer eyJ...
@@ -113,6 +116,9 @@ Authorization: Bearer eyJ...
 ## Rotate Agent Key
 
 Requires JWT authentication **plus step-up verification**.
+
+!!! warning
+    API keys are not accepted for this endpoint.
 
 Provide one of:
 - `stepUpCode` (email code from auth flow), or
@@ -146,6 +152,9 @@ Content-Type: application/json
 ## Revoke Agent Key
 
 Requires JWT authentication **plus step-up verification**.
+
+!!! warning
+    API keys are not accepted for this endpoint.
 
 Provide one of:
 - `stepUpCode`, or

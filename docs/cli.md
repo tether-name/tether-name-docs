@@ -136,6 +136,8 @@ tether agent delete "agent-id-here" --json
 
 List key lifecycle entries (`active`, `grace`, `revoked`) for an agent.
 
+Requires JWT access token auth (API keys are rejected by this endpoint).
+
 ```bash
 tether agent keys "agent-id"
 tether agent keys "agent-id" --json
@@ -143,7 +145,7 @@ tether agent keys "agent-id" --json
 
 ### `tether agent rotate-key <agentId>`
 
-Rotate an agent key. Requires step-up verification via either:
+Rotate an agent key. Requires JWT access token auth plus step-up verification via either:
 - `--step-up-code`, or
 - `--challenge` + `--proof`
 
@@ -156,7 +158,7 @@ tether agent rotate-key "agent-id" \
 
 ### `tether agent revoke-key <agentId> <keyId>`
 
-Revoke a specific key. Requires step-up verification via either:
+Revoke a specific key. Requires JWT access token auth plus step-up verification via either:
 - `--step-up-code`, or
 - `--challenge` + `--proof`
 
@@ -165,6 +167,9 @@ tether agent revoke-key "agent-id" "key-id" \
   --reason "compromised" \
   --step-up-code 123456
 ```
+
+!!! tip
+    The CLI flag/env name is still `--api-key` / `TETHER_API_KEY`, but for key lifecycle endpoints you should supply a JWT access token value there.
 
 ### `tether domain list`
 
@@ -194,7 +199,7 @@ The CLI resolves configuration in this order (first wins):
 |---|---|
 | `--agent-id <id>` | Override agent ID |
 | `--key-path <path>` | Override private key file path |
-| `--api-key <key>` | API key for agent management operations |
+| `--api-key <key>` | Bearer token for management operations (API key or JWT) |
 | `--verbose` | Enable debug output |
 | `--json` | Machine-readable JSON output (on supported commands) |
 
@@ -243,7 +248,7 @@ tether agent delete "agent-id"
 tether domain list
 ```
 
-Agent and domain management commands require an API key. Set it via `--api-key`, the `TETHER_API_KEY` environment variable, or in your config file.
+Agent and domain management commands require a bearer token. Use an API key for standard CRUD operations. For key lifecycle endpoints (`agent keys`, `rotate-key`, `revoke-key`), use a JWT access token. Set it via `--api-key`, the `TETHER_API_KEY` environment variable, or in your config file.
 
 ## Links
 

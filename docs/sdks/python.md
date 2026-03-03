@@ -35,7 +35,8 @@ result = client.submit_proof(challenge, proof)
 client = TetherClient(
     # Authentication — choose one:
 
-    # Option 1: API key (for agent management and agent operations)
+    # Option 1: Management bearer token (API key or JWT)
+    # For key lifecycle endpoints (list/rotate/revoke), use a JWT access token.
     api_key="sk-tether-name-...",
 
     # Option 2: Agent + private key (for verification and signing)
@@ -50,7 +51,7 @@ When `api_key` is set, `agent_id` and private key options become optional. A pri
 
 Environment variables:
 
-- `TETHER_API_KEY`
+- `TETHER_API_KEY` (management bearer token; API key or JWT)
 - `TETHER_AGENT_ID`
 - `TETHER_PRIVATE_KEY_PATH`
 
@@ -86,6 +87,8 @@ agents = client.list_agents()
 # Delete an agent
 client.delete_agent(agent.id)
 
+# Key lifecycle operations require JWT auth (not API key).
+# You can pass a JWT access token via api_key for these calls.
 # Key lifecycle operations
 keys = client.list_agent_keys(agent.id)
 rotated = client.rotate_agent_key(
@@ -137,15 +140,15 @@ List all registered domains for the authenticated account.
 
 ### `client.list_agent_keys(agent_id) -> list[AgentKey]`
 
-List key lifecycle entries (`active`, `grace`, `revoked`) for an agent.
+List key lifecycle entries (`active`, `grace`, `revoked`) for an agent. Requires JWT access token auth.
 
 ### `client.rotate_agent_key(...) -> RotateKeyResult`
 
-Rotate an agent key. Requires API key auth plus step-up verification via either `step_up_code` or `challenge` + `proof`.
+Rotate an agent key. Requires JWT access token auth plus step-up verification via either `step_up_code` or `challenge` + `proof`.
 
 ### `client.revoke_agent_key(...) -> RevokeKeyResult`
 
-Revoke an agent key. Requires API key auth plus step-up verification via either `step_up_code` or `challenge` + `proof`.
+Revoke an agent key. Requires JWT access token auth plus step-up verification via either `step_up_code` or `challenge` + `proof`.
 
 ### `client.verify() -> VerificationResult`
 

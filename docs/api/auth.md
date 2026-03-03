@@ -222,7 +222,10 @@ Include the API key in the `Authorization` header, just like a JWT:
 Authorization: Bearer sk-tether-name-...
 ```
 
-API keys can be used with all agent endpoints (`/agents/*`) and domain endpoints (`/domains/*`). Creating and managing API keys themselves requires JWT authentication.
+API keys can be used with most agent endpoints (`/agents/*`) and domain endpoints (`/domains/*`). Creating and managing API keys themselves requires JWT authentication.
+
+!!! warning
+    Key lifecycle endpoints (`GET /agents/{id}/keys`, `POST /agents/{id}/keys/rotate`, `POST /agents/{id}/keys/{keyId}/revoke`) require a JWT access token plus step-up verification where applicable.
 
 ### Limits
 

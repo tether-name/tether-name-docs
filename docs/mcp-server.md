@@ -35,6 +35,8 @@ Add to `claude_desktop_config.json`:
 !!! tip
     `TETHER_API_KEY` is only needed for management tools (`create_agent`, `list_agents`, `delete_agent`, `list_domains`, `list_agent_keys`, `rotate_agent_key`, `revoke_agent_key`).
 
+    Use an API key for standard CRUD management tools. For key lifecycle tools (`list_agent_keys`, `rotate_agent_key`, `revoke_agent_key`), supply a JWT access token value in `TETHER_API_KEY`.
+
     `request_challenge` does **not** require signing env vars. `verify_identity`, `sign_challenge`, and `submit_proof` require both `TETHER_AGENT_ID` and `TETHER_PRIVATE_KEY_PATH`.
 
 ### Cursor
@@ -91,7 +93,7 @@ Add to `.vscode/mcp.json`:
 
 ### Agent Management
 
-These tools require `TETHER_API_KEY` to be set.
+These tools require `TETHER_API_KEY` to be set (as a management bearer token: API key or JWT).
 
 | Tool | Description |
 |---|---|
@@ -99,9 +101,9 @@ These tools require `TETHER_API_KEY` to be set.
 | `list_agents` | List all agents for the authenticated account |
 | `delete_agent` | Delete an agent by ID |
 | `list_domains` | List all registered domains |
-| `list_agent_keys` | List key lifecycle entries (`active`, `grace`, `revoked`) for an agent |
-| `rotate_agent_key` | Rotate an agent key (requires `stepUpCode` or `challenge` + `proof`) |
-| `revoke_agent_key` | Revoke an agent key (requires `stepUpCode` or `challenge` + `proof`) |
+| `list_agent_keys` | List key lifecycle entries (`active`, `grace`, `revoked`) for an agent (**JWT required**) |
+| `rotate_agent_key` | Rotate an agent key (requires JWT + `stepUpCode` or `challenge` + `proof`) |
+| `revoke_agent_key` | Revoke an agent key (requires JWT + `stepUpCode` or `challenge` + `proof`) |
 
 ## Environment Variables
 
@@ -109,7 +111,7 @@ These tools require `TETHER_API_KEY` to be set.
 |---|---|---|
 | `TETHER_AGENT_ID` | For sign/submit/verify tools | Your Tether agent ID |
 | `TETHER_PRIVATE_KEY_PATH` | For sign/submit/verify tools | Path to RSA private key (DER or PEM) |
-| `TETHER_API_KEY` | For management | API key for agent/domain management |
+| `TETHER_API_KEY` | For management | Management bearer token (API key or JWT). JWT is required for key lifecycle tools. |
 | `TETHER_API_URL` | Optional | Override API URL (default: `https://api.tether.name`) |
 
 ## Security

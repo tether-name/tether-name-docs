@@ -35,7 +35,8 @@ const result = await client.submitProof(challenge, proof);
 const client = new TetherClient({
   // Authentication — choose one:
 
-  // Option 1: API key (for agent management and agent operations)
+  // Option 1: Management bearer token (API key or JWT)
+  // For key lifecycle endpoints (list/rotate/revoke), use a JWT access token.
   apiKey: 'sk-tether-name-...',
 
   // Option 2: Agent + private key (for verification and signing)
@@ -50,7 +51,7 @@ When `apiKey` is set, `agentId` and private key options become optional. A priva
 
 Environment variables:
 
-- `TETHER_API_KEY`
+- `TETHER_API_KEY` (management bearer token; API key or JWT)
 - `TETHER_AGENT_ID`
 - `TETHER_PRIVATE_KEY_PATH`
 
@@ -79,6 +80,8 @@ const agents = await client.listAgents();
 // Delete an agent
 await client.deleteAgent(agent.id);
 
+// Key lifecycle endpoints require JWT auth (not API key).
+// You can pass a JWT access token in `apiKey` for these calls.
 // List key lifecycle entries for an agent
 const keys = await client.listAgentKeys(agent.id);
 
@@ -139,19 +142,19 @@ Returns: `Promise<Domain[]>`
 
 ### `client.listAgentKeys(agentId)`
 
-List key lifecycle entries (`active`, `grace`, `revoked`) for an agent.
+List key lifecycle entries (`active`, `grace`, `revoked`) for an agent. Requires JWT access token auth.
 
 Returns: `Promise<AgentKey[]>`
 
 ### `client.rotateAgentKey(agentId, request)`
 
-Rotate an agent key. Requires API key auth plus step-up verification via either `stepUpCode` or `challenge` + `proof`.
+Rotate an agent key. Requires JWT access token auth plus step-up verification via either `stepUpCode` or `challenge` + `proof`.
 
 Returns: `Promise<RotateAgentKeyResponse>`
 
 ### `client.revokeAgentKey(agentId, keyId, request?)`
 
-Revoke a key. Requires API key auth plus step-up verification via either `stepUpCode` or `challenge` + `proof`.
+Revoke a key. Requires JWT access token auth plus step-up verification via either `stepUpCode` or `challenge` + `proof`.
 
 Returns: `Promise<RevokeAgentKeyResponse>`
 
