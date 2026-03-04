@@ -33,7 +33,7 @@ Add to `claude_desktop_config.json`:
 ```
 
 !!! tip
-    `TETHER_API_KEY` is only needed for management tools (`create_agent`, `list_agents`, `delete_agent`, `list_domains`, `list_agent_keys`, `rotate_agent_key`, `revoke_agent_key`).
+    `TETHER_API_KEY` is only needed for management tools (`create_agent`, `list_agents`, `delete_agent`, `update_agent_identity`, `list_domains`, `list_agent_keys`, `rotate_agent_key`, `revoke_agent_key`).
 
     API keys work for these tools. For key lifecycle mutations (`rotate_agent_key`, `revoke_agent_key`), prefer `challenge` + `proof` step-up in automation.
 
@@ -100,6 +100,7 @@ These tools require `TETHER_API_KEY` to be set (as a management bearer token: AP
 | `create_agent` | Create a new agent (with optional domain assignment) |
 | `list_agents` | List all agents for the authenticated account |
 | `delete_agent` | Delete an agent by ID |
+| `update_agent_identity` | Update whether verification shows a verified domain (`domainId`) or account email |
 | `list_domains` | List all registered domains |
 | `list_agent_keys` | List key lifecycle entries (`active`, `grace`, `revoked`) for an agent |
 | `rotate_agent_key` | Rotate an agent key (requires step-up: `stepUpCode` or `challenge` + `proof`) |

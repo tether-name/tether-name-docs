@@ -76,6 +76,11 @@ if (verifiedDomain) {
 // List all agents
 const agents = await client.listAgents();
 
+// Update which identity shows on verification
+await client.updateAgentDomain(agent.id, verifiedDomain?.id || '');
+// Pass empty string to show account email:
+await client.updateAgentDomain(agent.id, '');
+
 // Delete an agent
 await client.deleteAgent(agent.id);
 
@@ -126,6 +131,12 @@ Returns: `Promise<Agent>`
 List all agents.
 
 Returns: `Promise<Agent[]>`
+
+### `client.updateAgentDomain(agentId, domainId="")`
+
+Update which identity is shown on verification. Pass a verified domain ID to show that domain, or pass `""` to show the account email.
+
+Returns: `Promise<UpdateAgentResponse>`
 
 ### `client.deleteAgent(agentId)`
 
@@ -213,6 +224,13 @@ interface Domain {
   verifiedAt: number;
   lastCheckedAt: number;
   createdAt: number;
+}
+
+interface UpdateAgentResponse {
+  id: string;
+  domainId?: string;
+  domain?: string | null;
+  message: string;
 }
 
 interface AgentKey {

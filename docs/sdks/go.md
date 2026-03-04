@@ -105,6 +105,11 @@ if len(domains) > 0 && domains[0].Verified {
 // List all agents
 agents, err := client.ListAgents(ctx)
 
+// Update which identity shows on verification
+_, err = client.UpdateAgentDomain(ctx, agent.ID, domains[0].ID)
+// Pass empty string to show account email:
+_, err = client.UpdateAgentDomain(ctx, agent.ID, "")
+
 // Delete an agent
 deleted, err := client.DeleteAgent(ctx, agent.ID)
 fmt.Println(deleted)
@@ -166,6 +171,10 @@ List all agents. Requires bearer auth (JWT or API key).
 ### `client.DeleteAgent(ctx, agentID) (bool, error)`
 
 Delete an agent. Requires bearer auth (JWT or API key).
+
+### `client.UpdateAgentDomain(ctx, agentID, domainID) (*UpdateAgentResponse, error)`
+
+Update which identity is shown on verification. Pass a verified domain ID to show that domain, or pass `""` to show account email.
 
 ### `client.ListDomains(ctx) ([]Domain, error)`
 
@@ -233,6 +242,13 @@ type Domain struct {
     VerifiedAt    int64
     LastCheckedAt int64
     CreatedAt     int64
+}
+
+type UpdateAgentResponse struct {
+    ID       string
+    DomainID string
+    Domain   string
+    Message  string
 }
 
 type AgentKey struct {

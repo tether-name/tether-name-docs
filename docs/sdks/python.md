@@ -83,6 +83,11 @@ if verified:
 # List all agents
 agents = client.list_agents()
 
+# Update which identity shows on verification
+client.update_agent_domain(agent.id, verified[0].id if verified else "")
+# Pass empty string to show account email:
+client.update_agent_domain(agent.id, "")
+
 # Delete an agent
 client.delete_agent(agent.id)
 
@@ -128,6 +133,10 @@ Create a new agent. Optionally assign a verified domain by passing its ID.
 ### `client.list_agents() -> list[Agent]`
 
 List all agents.
+
+### `client.update_agent_domain(agent_id, domain_id="") -> UpdateAgentResult`
+
+Update which identity is shown on verification. Pass a verified domain ID to show that domain, or pass `""` to show the account email.
 
 ### `client.delete_agent(agent_id) -> bool`
 
@@ -204,6 +213,13 @@ class Domain:
     verified_at: int
     last_checked_at: int
     created_at: int
+
+@dataclass
+class UpdateAgentResult:
+    id: str
+    domain_id: str
+    domain: Optional[str]
+    message: str
 
 @dataclass
 class AgentKey:

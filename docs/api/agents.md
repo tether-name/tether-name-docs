@@ -205,6 +205,44 @@ Authorization: Bearer eyJ...
 ]
 ```
 
+## Update Agent Identity Display
+
+Requires authentication (JWT or API key).
+
+Use this endpoint to control what appears on verification results for an agent:
+
+- pass a verified `domainId` to show that domain
+- pass an empty string (`""`) to show the account email
+
+```
+PATCH /agents/{agentId}
+Authorization: Bearer eyJ...
+Content-Type: application/json
+
+{
+  "domainId": "optional-verified-domain-id"
+}
+```
+
+**Response (200 OK):**
+
+```json
+{
+  "id": "rgUOzbqar8z0Ag9RZH5I",
+  "domainId": "optional-verified-domain-id",
+  "domain": "example.com",
+  "message": "Agent will show example.com in verification results"
+}
+```
+
+To revert to email display:
+
+```json
+{
+  "domainId": ""
+}
+```
+
 ## Delete an Agent
 
 Requires authentication (JWT or API key).

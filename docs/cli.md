@@ -132,6 +132,22 @@ tether agent delete "agent-id-here"
 tether agent delete "agent-id-here" --json
 ```
 
+### `tether agent update <id>`
+
+Update which identity appears when that agent is verified.
+
+```bash
+# Show a verified domain
+tether agent update "agent-id-here" --domain-id "domain-id"
+
+# Revert to account email
+tether agent update "agent-id-here" --show-email
+```
+
+```bash
+tether agent update "agent-id-here" --domain-id "domain-id" --json
+```
+
 ### `tether agent keys <agentId>`
 
 List key lifecycle entries (`active`, `grace`, `revoked`) for an agent.
@@ -232,6 +248,10 @@ tether agent create "my-bot" --description "My helpful assistant"
 # Create an agent with a verified domain
 tether domain list                              # find the domain ID
 tether agent create "my-bot" --domain-id "abc123"
+
+# Update identity display
+tether agent update "agent-id" --show-email
+tether agent update "agent-id" --domain-id "abc123"
 
 # List all agents
 tether agent list
