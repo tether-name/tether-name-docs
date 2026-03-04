@@ -12,7 +12,7 @@ Built with [MkDocs Material](https://squidfunk.github.io/mkdocs-material/).
 
 ```bash
 pip install mkdocs-material
-mkdocs serve
+python3 -m mkdocs serve
 ```
 
 ## Deploy
