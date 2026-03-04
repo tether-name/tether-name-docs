@@ -61,6 +61,18 @@ Content-Type: application/json
 }
 ```
 
+Common `error` values:
+
+- `missing_required_fields`
+- `agent_not_found`
+- `agent_owner_not_found`
+- `agent_missing_public_key`
+- `signature_invalid`
+- `challenge_not_found`
+- `challenge_expired`
+- `challenge_already_used`
+- `internal_error`
+
 ## Check Challenge Status
 
 ```
@@ -80,6 +92,15 @@ Returns the current status of a challenge — whether it's been verified and by 
     "intervalMs": 3000,
     "maxAttempts": 60
   }
+}
+```
+
+**Response (not found):**
+
+```json
+{
+  "challenge": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "status": "not_found"
 }
 ```
 

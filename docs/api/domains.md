@@ -152,36 +152,27 @@ Only agents with an explicitly assigned `domainId` will show the domain. Agents 
 
 ## Re-verification (Admin)
 
-Verified domains are periodically re-checked via an admin endpoint. If the DNS TXT record is removed, the domain's verified status is revoked and agents will fall back to showing `email` on verification results.
+Verified domains are periodically re-checked via admin endpoints. If the DNS TXT record is removed, the domain's verified status is revoked and agents fall back to showing `email` on verification results.
 
-```
+```http
 POST /admin/domain-reverify
-Authorization: Bearer <admin JWT>
+Authorization: Bearer <admin-token>
 ```
 
-**Response:**
-
-```json
-{
-  "checked": 3,
-  "revoked": 1,
-  "stillValid": 2,
-  "errors": 0,
-  "details": [
-    { "domainId": "abc123", "domain": "example.com", "userId": "user1", "status": "valid" },
-    { "domainId": "def456", "domain": "old-domain.com", "userId": "user2", "status": "revoked" },
-    { "domainId": "ghi789", "domain": "another.com", "userId": "user3", "status": "valid" }
-  ]
-}
+```http
+DELETE /admin/cleanup
+Authorization: Bearer <admin-token>
 ```
 
-This endpoint is designed to be called by an external cron job (e.g. daily or weekly). Revoked domains can be re-verified by the owner at any time from their dashboard once the TXT record is restored.
+`/admin/domain-reverify` is intended for scheduled jobs (daily/weekly). Revoked domains can be re-verified by the owner after restoring the TXT record.
 
 Admin auth is configured server-side via allowlists:
-- user allowlists: `ADMIN_USER_IDS` / `ADMIN_EMAILS`
-- Google OIDC service accounts for schedulers: `ADMIN_OIDC_SERVICE_ACCOUNTS` (+ optional `ADMIN_OIDC_AUDIENCE`)
+- `ADMIN_USER_IDS` / `ADMIN_EMAILS`
+- optional `ADMIN_ALLOW_API_KEYS=true` (allow API key auth for allowlisted admins)
+- `ADMIN_OIDC_SERVICE_ACCOUNTS` (+ optional `ADMIN_OIDC_AUDIENCE`) for Google OIDC service-account auth
+- legacy `ADMIN_SECRET` bearer auth (backward compatibility)
 
-Legacy `ADMIN_SECRET` bearer auth may still be enabled for backward compatibility.
+For full admin response examples, see [System & Metadata Endpoints](system.md).
 
 ## Limits
 

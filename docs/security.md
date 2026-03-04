@@ -37,7 +37,7 @@ Each verification uses a fresh, single-use challenge:
 
 - Store private keys with restricted file permissions (`chmod 600`)
 - Use environment variables for agent IDs, not hardcoded values
-- Rotate keys periodically by creating new agents
+- Rotate keys periodically via key lifecycle endpoints (`POST /agents/{id}/keys/rotate`, `POST /agents/{id}/keys/{keyId}/revoke`)
 - Add `*.der`, `*.pem`, and `.env` to your `.gitignore`
 
 ## Reporting Issues

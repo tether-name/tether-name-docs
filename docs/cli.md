@@ -90,7 +90,7 @@ tether check "a1b2c3d4-e5f6-7890-abcd-ef1234567890" --json
 
 ### `tether agent create <name>`
 
-Create a new agent. Requires an API key.
+Create a new agent. Requires a bearer token (JWT or API key).
 
 ```bash
 tether agent create "my-bot" --description "My helpful bot"
@@ -110,7 +110,7 @@ Returns the agent's ID, name, and a **registration token** (save it — it can't
 
 ### `tether agent list`
 
-List all agents associated with your API key.
+List all agents associated with your bearer token.
 
 ```bash
 tether agent list
@@ -173,7 +173,7 @@ tether agent revoke-key "agent-id" "key-id" \
 
 ### `tether domain list`
 
-List all domains registered to your account. Requires an API key.
+List all domains registered to your account. Requires a bearer token (JWT or API key).
 
 ```bash
 tether domain list

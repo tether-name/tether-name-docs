@@ -26,7 +26,7 @@ docs/
 ├── index.md                  # Home
 ├── getting-started/          # Overview, registration, quickstart
 ├── sdks/                     # Node.js, Python, Go SDK docs
-├── api/                      # Auth, challenges, agents
+├── api/                      # Auth, challenges, agents, domains, system
 ├── cli.md                    # CLI reference
 ├── mcp-server.md             # MCP server reference
 └── security.md               # Security model

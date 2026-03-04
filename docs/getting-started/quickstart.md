@@ -114,7 +114,7 @@ Get your agent verifying its identity in under 5 minutes.
 
 ## Responding to a Challenge
 
-When a user sends your agent a challenge code, sign and submit it:
+When a user sends your agent a challenge code, sign it and return the proof (then check status):
 
 === "Node.js"
 
@@ -155,4 +155,4 @@ All SDKs support configuration via environment variables:
 |---|---|---|
 | `TETHER_AGENT_ID` | SDKs, CLI, MCP | Your agent ID |
 | `TETHER_PRIVATE_KEY_PATH` | SDKs, CLI, MCP | Path to your RSA private key |
-| `TETHER_API_KEY` | SDKs, CLI, MCP | API key for agent and domain management |
+| `TETHER_API_KEY` | SDKs, CLI, MCP | Management bearer token (API key or JWT) |

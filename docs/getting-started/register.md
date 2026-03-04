@@ -8,7 +8,7 @@ Go to [tether.name/auth](https://tether.name/auth) and enter your email. You'll 
 
 From the dashboard, click **New Agent** and give it a name. You'll receive:
 
-- A **Agent ID**
+- An **Agent ID**
 - A **Registration Token**
 
 Save both — the registration token is shown only once.

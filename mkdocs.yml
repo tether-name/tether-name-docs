@@ -41,6 +41,7 @@ nav:
     - Challenges: api/challenges.md
     - Agents: api/agents.md
     - Domains: api/domains.md
+    - System & Metadata: api/system.md
   - Security: security.md
 
 markdown_extensions:

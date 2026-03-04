@@ -1,6 +1,9 @@
 # Authentication
 
-The Tether API supports two authentication methods: JWT access tokens and API keys.
+The Tether API supports two authentication methods:
+
+- **JWT access tokens** (issued by passwordless auth)
+- **API keys** (long-lived management tokens)
 
 ## Passwordless Auth
 
@@ -36,7 +39,8 @@ Content-Type: application/json
 ```json
 {
   "accessToken": "eyJ...",
-  "refreshToken": "eyJ..."
+  "refreshToken": "eyJ...",
+  "email": "you@example.com"
 }
 ```
 
@@ -58,7 +62,8 @@ Content-Type: application/json
 ```json
 {
   "accessToken": "eyJ...",
-  "refreshToken": "eyJ..."
+  "refreshToken": "eyJ...",
+  "email": "you@example.com"
 }
 ```
 
@@ -103,7 +108,7 @@ X-Tether-Session-Mode: cookie
 ```
 
 !!! note
-    Refresh tokens are rotated on each use — the old token is invalidated and a new pair is returned. Always store and use the new `refreshToken` from the response.
+    Refresh tokens are rotated on each use — the old token is invalidated and a new pair is returned. Always store and use the new `refreshToken` from the response (or updated cookie in cookie mode).
 
 ## Using Access Tokens
 
@@ -120,7 +125,43 @@ GET /auth/me
 Authorization: Bearer eyJ...
 ```
 
-Returns the currently authenticated user's info.
+**Response:**
+
+```json
+{
+  "email": "you@example.com",
+  "createdAt": 1736899200000
+}
+```
+
+### List Active Sessions
+
+Lists active refresh-token sessions for the currently authenticated user.
+
+```
+GET /sessions
+Authorization: Bearer eyJ...
+```
+
+**Response:**
+
+```json
+{
+  "sessions": [
+    {
+      "tokenId": "f7d9...",
+      "userAgent": "Mozilla/5.0 ...",
+      "ipAddress": "203.0.113.10",
+      "createdAt": 1736899200000,
+      "lastUsedAt": 1736899800000,
+      "expiresAt": 1739500000000
+    }
+  ]
+}
+```
+
+!!! note
+    `/sessions` accepts **access JWTs** (not API keys).
 
 ### Logout
 
@@ -142,7 +183,7 @@ POST /auth/logout
 X-Tether-Session-Mode: cookie
 ```
 
-Invalidates the current session.
+Invalidates the current refresh-token session.
 
 ## API Keys
 
@@ -229,7 +270,7 @@ API keys can be used with most agent endpoints (`/agents/*`) and domain endpoint
 
     For automation with API keys, prefer `challenge` + `proof` step-up.
 
-### Limits
+## Limits
 
 | Limit | Value |
 |-------|-------|
@@ -239,7 +280,7 @@ API keys can be used with most agent endpoints (`/agents/*`) and domain endpoint
 !!! info
     If you need more API keys, please contact us at [support@tether.name](mailto:support@tether.name).
 
-### Security Notes
+## Security Notes
 
 - API keys are hashed before storage — they cannot be retrieved after creation.
 - The `sk-tether-name-` prefix enables automated leak detection in logs and repositories.
@@ -250,7 +291,11 @@ API keys can be used with most agent endpoints (`/agents/*`) and domain endpoint
 
 The following endpoints do **not** require authentication:
 
+- `GET /` — Health check
 - `POST /challenge` — Request a challenge
 - `POST /challenge/verify` — Submit proof
 - `GET /challenge/{code}` — Check challenge status
+- `GET /AGENTS.md` — Agent-readable verification guidance
 - `GET /.well-known/tether-name.json` — Machine-readable endpoint map and protocol metadata
+- `GET /version` — Build metadata
+- `GET /stats` — Global verification stats

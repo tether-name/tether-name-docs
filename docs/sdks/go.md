@@ -157,19 +157,19 @@ Creates a new client. Returns an error if neither `ApiKey` nor `AgentID` is prov
 
 ### `client.CreateAgent(ctx, agentName, description, domainID...) (*Agent, error)`
 
-Create a new agent. Optionally pass a verified domain ID as the last argument. Requires API key auth.
+Create a new agent. Optionally pass a verified domain ID as the last argument. Requires bearer auth (JWT or API key).
 
 ### `client.ListAgents(ctx) ([]Agent, error)`
 
-List all agents. Requires API key auth.
+List all agents. Requires bearer auth (JWT or API key).
 
 ### `client.DeleteAgent(ctx, agentID) (bool, error)`
 
-Delete an agent. Requires API key auth.
+Delete an agent. Requires bearer auth (JWT or API key).
 
 ### `client.ListDomains(ctx) ([]Domain, error)`
 
-List all registered domains for the authenticated account. Requires API key auth.
+List all registered domains for the authenticated account. Requires bearer auth (JWT or API key).
 
 ### `client.ListAgentKeys(ctx, agentID) ([]AgentKey, error)`
 
